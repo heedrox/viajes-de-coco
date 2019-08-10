@@ -22,11 +22,3 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-window.game= game;
-
-function preload() {
-}
-
-function create() {
-
-}
