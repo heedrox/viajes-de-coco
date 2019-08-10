@@ -1,11 +1,20 @@
 import Phaser from "phaser";
-import logoImg from "./assets/logo.png";
+import backgroundImg from "./assets/coco1.jpg";
+
+const docElement = document.documentElement;
+const width = docElement.clientWidth;
+const height = docElement.clientHeight;
+
+const getRatio = (image, game) => {
+  if (game.scale.isGameLandscape) return game.canvas.height / image.height;
+  return game.canvas.width / image.width;
+};
 
 const config = {
   type: Phaser.AUTO,
-  parent: "phaser-example",
-  width: 800,
-  height: 600,
+  parent: "content",
+  width: width,
+  height: height,
   scene: {
     preload: preload,
     create: create
@@ -13,20 +22,21 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+window.game= game;
 
 function preload() {
-  this.load.image("logo", logoImg);
+  this.load.image("BACKGROUND_IMAGE", backgroundImg);
 }
 
 function create() {
-  const logo = this.add.image(400, 150, "logo");
+  const logo = this.add.image(game.canvas.width/2, game.canvas.height/2, "BACKGROUND_IMAGE");
+  game.scale.scaleMode = Phaser.Scale.RESIZE;
+  game.scale.parentIsWindow = true;
 
-  this.tweens.add({
-    targets: logo,
-    y: 450,
-    duration: 2000,
-    ease: "Power2",
-    yoyo: true,
-    loop: -1
-  });
+  const ratio = getRatio(logo, game);
+  logo.scale = ratio;
+  console.log('world',game);
+  // logo.x = game.world.centerX;
+  // logo.y = game.world.centerY;
+
 }

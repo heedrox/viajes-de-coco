@@ -1,7 +1,7 @@
 {
-  "name": "phaser3-project-template",
-  "version": "1.1.0",
-  "description": "A Phaser 3 Project Template",
+  "name": "cocotrips",
+  "version": "1.0.0",
+  "description": "Los viajes de coco",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack --config webpack/prod.js ",
