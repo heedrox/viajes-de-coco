@@ -19,6 +19,7 @@ export default class FindCoco extends Phaser.Scene {
 
   create() {
     const logo = this.add.image(this.game.canvas.width/2, this.game.canvas.height/2, "BACKGROUND_IMAGE");
+    logo.name = "backgroundImage"
     this.game.scale.scaleMode = Phaser.Scale.RESIZE;
     this.game.scale.parentIsWindow = true;
 
@@ -35,7 +36,9 @@ export default class FindCoco extends Phaser.Scene {
 
     pinch.on('drag1', function(pinch) {
       // var drag1Vector = pinch.drag1Vector; // drag1Vector: {x, y}
-      console.log('pinch drag1 detected', pinch);
+      console.log('pinch drag1 detected', pinch.drag1Vector);
+      logo.x += pinch.drag1Vector.x;
+      logo.y += pinch.drag1Vector.y;
     }, this);
 
     pinch.on('pinch', function(pinch) {
