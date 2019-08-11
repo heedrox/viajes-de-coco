@@ -77,7 +77,9 @@ export default class FindCoco extends Phaser.Scene {
 
       const xPercent = (tapEvent.x - imageLeft)/image.displayWidth*100;
       const yPercent = (tapEvent.y - imageTop)/image.displayHeight*100;
-      console.log('x-y',xPercent, yPercent );
+      if ((xPercent >= 79) && (xPercent <= 81) && (yPercent >= 61) && (yPercent<=64)) {
+        alert('youfoundit');
+      }
     }, this);
   }
 }
