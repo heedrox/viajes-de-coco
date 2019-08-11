@@ -53,7 +53,7 @@ export default class FindCoco extends Phaser.Scene {
 
   addZoomEvent(image, pinch) {
     pinch.on('pinch', function(pinch) {
-      image.scale *= pinch.scaleFactor;;
+      image.scale *= pinch.scaleFactor;
     }, this);
 
   }
@@ -72,8 +72,12 @@ export default class FindCoco extends Phaser.Scene {
       maxTaps: undefined,
     });
     tap.on('tap', function(tapEvent) {
-      console.log('tapx', tapEvent.x);
-      console.log('tapx-worldx', tapEvent.worldX);
+      const imageLeft = image.x - image.displayWidth*image.originX;
+      const imageTop = image.y - image.displayHeight*image.originY;
+
+      const xPercent = (tapEvent.x - imageLeft)/image.displayWidth*100;
+      const yPercent = (tapEvent.y - imageTop)/image.displayHeight*100;
+      console.log('x-y',xPercent, yPercent );
     }, this);
   }
 }
