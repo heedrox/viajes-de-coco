@@ -18,6 +18,12 @@ export default class FindCoco extends Phaser.Scene {
   }
 
   create() {
+    const image = this.addImage();
+    this.allowZoomAndMove(image);
+    this.listenClicks(image);
+  }
+
+  addImage() {
     const logo = this.add.image(this.game.canvas.width/2, this.game.canvas.height/2, "BACKGROUND_IMAGE");
     logo.name = "backgroundImage"
     this.game.scale.scaleMode = Phaser.Scale.RESIZE;
@@ -25,27 +31,49 @@ export default class FindCoco extends Phaser.Scene {
 
     const ratio = getRatio(logo, this.game);
     logo.scale = ratio;
-    console.log('world', this.game);
+    return logo;
+  }
 
-    console.log('rex', this.rexGestures);
+  allowZoomAndMove(image) {
     const pinch = this.rexGestures.add.pinch({
       enable: true,
       bounds: undefined,
       threshold: 0,
     });
+    this.addMoveEvent(image, pinch);
+    this.addZoomEvent(image, pinch);
+  }
 
+  addMoveEvent(image, pinch) {
     pinch.on('drag1', function(pinch) {
-      // var drag1Vector = pinch.drag1Vector; // drag1Vector: {x, y}
-      console.log('pinch drag1 detected', pinch.drag1Vector);
-      logo.x += pinch.drag1Vector.x;
-      logo.y += pinch.drag1Vector.y;
+      image.x += pinch.drag1Vector.x;
+      image.y += pinch.drag1Vector.y;
+    }, this);
+  }
+
+  addZoomEvent(image, pinch) {
+    pinch.on('pinch', function(pinch) {
+      image.scale *= pinch.scaleFactor;;
     }, this);
 
-    pinch.on('pinch', function(pinch) {
-      console.log('pinch drag 2 pointers detected', pinch);
+  }
 
-      var scaleFactor = pinch.scaleFactor;
-      logo.scale *= scaleFactor;
+  listenClicks(image) {
+    const tap = this.rexGestures.add.tap(image, {
+      enable: true,
+
+      time: 250,
+      tapInterval: 200,
+      threshold: 9,
+      tapOffset: 10,
+
+      taps: undefined,
+      minTaps: undefined,
+      maxTaps: undefined,
+    });
+    tap.on('tap', function(tapEvent) {
+      console.log('tapx', tapEvent.x);
+      console.log('tapx-worldx', tapEvent.worldX);
     }, this);
   }
 }
