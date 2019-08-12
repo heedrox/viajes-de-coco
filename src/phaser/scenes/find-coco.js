@@ -9,8 +9,13 @@ const getRatio = (image, game) => {
 
 export default class FindCoco extends Phaser.Scene {
 
-  constructor() {
+  constructor(onCocoClick) {
     super("findCoco");
+    this.onCocoClick = onCocoClick;
+  }
+
+  init(data) {
+    console.log('received data', data);
   }
 
   preload() {
@@ -27,7 +32,7 @@ export default class FindCoco extends Phaser.Scene {
 
   addImage() {
     const image = this.add.image(this.game.canvas.width/2, this.game.canvas.height/2, "BACKGROUND_IMAGE");
-    image.name = "backgroundImage"
+    image.name = "backgroundImage";
     this.game.scale.scaleMode = Phaser.Scale.RESIZE;
     this.game.scale.parentIsWindow = true;
     this.setImageFitWindow(image);
@@ -82,9 +87,7 @@ export default class FindCoco extends Phaser.Scene {
 
       const xPercent = (tapEvent.x - imageLeft)/image.displayWidth*100;
       const yPercent = (tapEvent.y - imageTop)/image.displayHeight*100;
-      if ((xPercent >= 79) && (xPercent <= 81) && (yPercent >= 61) && (yPercent<=64)) {
-        alert('youfoundit');
-      }
+      this.onCocoClick(xPercent, yPercent);
     }, this);
   }
 }
