@@ -1,11 +1,18 @@
 import Phaser from "phaser";
-import backgroundImg from "../assets/coco1.jpg";
 
 const getRatio = (image, game) => {
   if (game.scale.isGameLandscape) return game.canvas.height / image.height;
   return game.canvas.width / image.width;
 };
 
+const getClickPercent = (image, tapEvent) => {
+  const imageLeft = image.x - image.displayWidth * image.originX;
+  const imageTop = image.y - image.displayHeight * image.originY;
+
+  const xPercent = (tapEvent.x - imageLeft) / image.displayWidth * 100;
+  const yPercent = (tapEvent.y - imageTop) / image.displayHeight * 100;
+  return { xPercent, yPercent };
+};
 
 export default class FindCoco extends Phaser.Scene {
 
@@ -16,9 +23,6 @@ export default class FindCoco extends Phaser.Scene {
 
   init(data) {
     this.levelData = data.levelData;
-  }
-
-  preload() {
   }
 
   create() {
@@ -81,11 +85,7 @@ export default class FindCoco extends Phaser.Scene {
       maxTaps: undefined,
     });
     tap.on('tap', function(tapEvent) {
-      const imageLeft = image.x - image.displayWidth*image.originX;
-      const imageTop = image.y - image.displayHeight*image.originY;
-
-      const xPercent = (tapEvent.x - imageLeft)/image.displayWidth*100;
-      const yPercent = (tapEvent.y - imageTop)/image.displayHeight*100;
+      const { xPercent, yPercent } = getClickPercent(image, tapEvent);
       this.onCocoClick(xPercent, yPercent);
     }, this);
   }
