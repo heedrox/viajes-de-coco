@@ -15,23 +15,22 @@ export default class FindCoco extends Phaser.Scene {
   }
 
   init(data) {
-    console.log('received data', data);
+    this.levelData = data.levelData;
   }
 
   preload() {
-    this.load.image("BACKGROUND_IMAGE", backgroundImg);
   }
 
   create() {
-    const image = this.addImage();
+    const image = this.addImage(`image-${this.levelData.id}`);
     this.scale.lockOrientation('landscape-primary');
 
     this.allowZoomAndMove(image);
     this.listenClicks(image);
   }
 
-  addImage() {
-    const image = this.add.image(this.game.canvas.width/2, this.game.canvas.height/2, "BACKGROUND_IMAGE");
+  addImage(name) {
+    const image = this.add.image(this.game.canvas.width/2, this.game.canvas.height/2, name);
     image.name = "backgroundImage";
     this.game.scale.scaleMode = Phaser.Scale.RESIZE;
     this.game.scale.parentIsWindow = true;

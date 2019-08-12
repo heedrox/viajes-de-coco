@@ -1,11 +1,10 @@
 import Phaser from 'phaser';
 
-const getImage = level => `assets/levels/${level.id}.jpg`;
-
 export default class SplashScreen extends Phaser.Scene {
-  constructor(levels) {
-    super("splashScreen")
+  constructor(levels, onReady) {
+    super("splashScreen");
     this.levels = levels;
+    this.onReady = onReady;
   }
 
   preload() {
@@ -19,12 +18,13 @@ export default class SplashScreen extends Phaser.Scene {
     //
     // load your assets
     //
+    console.log(this.levels);
     this.levels.forEach((level) => {
-      this.load.image(`image-${level.id}`, getImage(level));
+      this.load.image(`image-${level.id}`, level.image);
     });
   }
 
   create() {
-    this.scene.start('findCoco', {id: 0});
+    this.onReady();
   }
 }

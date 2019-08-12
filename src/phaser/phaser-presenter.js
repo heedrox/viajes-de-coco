@@ -13,13 +13,21 @@ export default class PhaserPresenter {
     this.onCocoClick = onCocoClick;
   }
 
+  setLevels(levels) {
+    this.levels = levels;
+  }
+
+  setOnReady(onReady) {
+    this.onReady = onReady;
+  }
+
   start() {
     const PHASER_CONFIG = {
       type: Phaser.AUTO,
       parent: "content",
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight,
-      scene: [ new SplashScreen(this.levels), new FindCoco(this.onCocoClick) ],
+      scene: [ new SplashScreen(this.levels, this.onReady), new FindCoco(this.onCocoClick) ],
       plugins: {
         scene: [{
           key: 'rexGestures',
@@ -31,6 +39,10 @@ export default class PhaserPresenter {
 
     this.game = new Phaser.Game(PHASER_CONFIG);
     // window.game = this.game;
+  }
+
+  showLevel(levelData) {
+    this.game.scene.start('findCoco', {levelData});
   }
 
 }
