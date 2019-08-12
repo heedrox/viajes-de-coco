@@ -19,19 +19,24 @@ export default class FindCoco extends Phaser.Scene {
 
   create() {
     const image = this.addImage();
+    this.scale.lockOrientation('landscape-primary');
+
     this.allowZoomAndMove(image);
     this.listenClicks(image);
   }
 
   addImage() {
-    const logo = this.add.image(this.game.canvas.width/2, this.game.canvas.height/2, "BACKGROUND_IMAGE");
-    logo.name = "backgroundImage"
+    const image = this.add.image(this.game.canvas.width/2, this.game.canvas.height/2, "BACKGROUND_IMAGE");
+    image.name = "backgroundImage"
     this.game.scale.scaleMode = Phaser.Scale.RESIZE;
     this.game.scale.parentIsWindow = true;
+    this.setImageFitWindow(image);
+    return image;
+  }
 
-    const ratio = getRatio(logo, this.game);
-    logo.scale = ratio;
-    return logo;
+  setImageFitWindow(image) {
+    const ratio = getRatio(image, this.game);
+    image.scale = ratio;
   }
 
   allowZoomAndMove(image) {

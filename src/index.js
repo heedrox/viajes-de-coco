@@ -1,25 +1,6 @@
-import Phaser from "phaser";
-import GesturesPlugin from './plugins/gestures-plugin.js';
-import FindCoco from './scenes/find-coco.js';
+import PhaserPresenter from './phaser/phaser-presenter';
 
-const docElement = document.documentElement;
-const width = docElement.clientWidth;
-const height = docElement.clientHeight;
+const phaserPresenter = new PhaserPresenter();
 
-const config = {
-  type: Phaser.AUTO,
-  parent: "content",
-  width: width,
-  height: height,
-  scene: [ FindCoco ],
-  plugins: {
-    scene: [{
-      key: 'rexGestures',
-      plugin: GesturesPlugin,
-      mapping: 'rexGestures'
-    }]
-  }
-};
+phaserPresenter.start();
 
-const game = new Phaser.Game(config);
-window.game = game;
