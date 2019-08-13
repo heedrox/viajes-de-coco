@@ -29,7 +29,7 @@ export default class GameEngine {
 
   showNextLevel() {
     this.numLevel = this.numLevel + 1;
-    if (this.numLevel > this.levels.length) {
+    if (this.numLevel >= this.levels.length) {
       this.endGame();
     } else {
       this.showCurrentLevel();
