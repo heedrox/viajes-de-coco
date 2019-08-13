@@ -4,9 +4,23 @@ import FindCoco from './scenes/find-coco.js';
 import SplashScreen from './scenes/splash-screen';
 
 
+const phaserConfig = (levels, onReady, onCocoClick) => ({
+  type: Phaser.AUTO,
+  parent: "content",
+  width: document.documentElement.clientWidth,
+  height: document.documentElement.clientHeight,
+  scene: [ new SplashScreen(levels, onReady), new FindCoco(onCocoClick) ],
+  plugins: {
+    scene: [{
+      key: 'rexGestures',
+      plugin: GesturesPlugin,
+      mapping: 'rexGestures'
+    }]
+  }
+});
+
 export default class PhaserPresenter {
-  constructor(levels) {
-    this.levels = levels;
+  constructor() {
   }
 
   setOnCocoClick(onCocoClick) {
@@ -22,27 +36,18 @@ export default class PhaserPresenter {
   }
 
   start() {
-    const PHASER_CONFIG = {
-      type: Phaser.AUTO,
-      parent: "content",
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight,
-      scene: [ new SplashScreen(this.levels, this.onReady), new FindCoco(this.onCocoClick) ],
-      plugins: {
-        scene: [{
-          key: 'rexGestures',
-          plugin: GesturesPlugin,
-          mapping: 'rexGestures'
-        }]
-      }
-    };
+    const PHASER_CONFIG = phaserConfig(this.levels, this.onReady, this.onCocoClick);
 
     this.game = new Phaser.Game(PHASER_CONFIG);
-    // window.game = this.game;
+    window.game = this.game;
   }
 
-  showLevel(levelData) {
-    this.game.scene.start('findCoco', {levelData});
+  showLevel(levelData, startDate) {
+    this.game.scene.start('findCoco', {levelData, startDate});
+  }
+
+  showScore(score) {
+    alert('score: ' + score);
   }
 
 }

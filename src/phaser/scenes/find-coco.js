@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+const TIMER_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#287cc4', align: 'left' };
+
 const getRatio = (image, game) => {
   if (game.scale.isGameLandscape) return game.canvas.height / image.height;
   return game.canvas.width / image.width;
@@ -23,6 +25,7 @@ export default class FindCoco extends Phaser.Scene {
 
   init(data) {
     this.levelData = data.levelData;
+    this.startDate = data.startDate;
   }
 
   preload() {
@@ -33,6 +36,7 @@ export default class FindCoco extends Phaser.Scene {
 
   create() {
     console.log('creating');
+    this.addTimer();
     const image = this.addImage(`backgroundImage`);
     this.scale.lockOrientation('landscape-primary');
 
@@ -40,11 +44,31 @@ export default class FindCoco extends Phaser.Scene {
     this.listenClicks(image);
   }
 
+  addTimer() {
+    // if (!this.timerText) {
+    const xPos = this.game.canvas.width / 2;
+    const yPos = 30;
+    this.timerText = this.add.text(xPos, yPos, '10.87', TIMER_CSS);
+    // this.timerText.padding = { left: 10, right: 10, top: 16, bottom: 16 };
+    this.timerText.setDepth(10);
+    this.timerText.setOrigin(0.5, 0.5);
+    this.timerText.setAlign('center');
+    this.timerText.setShadow(3, 3, 'rgba(237,117,163,1)', 0);
+    this.timerText.setFixedSize(200, 54);
+    //}
+  }
+
+  update() {
+    const time = Math.floor((new Date() - this.startDate)/1000);
+    this.timerText.setText(`${time}`);
+  }
+
   addImage(name) {
     const image = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, name);
     image.name = 'backgroundImage';
     this.game.scale.scaleMode = Phaser.Scale.RESIZE;
     this.game.scale.parentIsWindow = true;
+    image.setDepth(1);
     this.setImageFitWindow(image);
     return image;
   }

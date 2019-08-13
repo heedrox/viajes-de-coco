@@ -1,10 +1,12 @@
 import Phaser from 'phaser';
+import WebFont from 'webfontloader';
 
 export default class SplashScreen extends Phaser.Scene {
   constructor(levels, onReady) {
     super("splashScreen");
     this.levels = levels;
     this.onReady = onReady;
+    this.isFontLoaded = false;
   }
 
   preload() {
@@ -18,13 +20,23 @@ export default class SplashScreen extends Phaser.Scene {
     //
     // load your assets
     //
-    console.log(this.levels);
+    WebFont.load({
+      google: {
+        families: ['Bangers'],
+      },
+      active: () => { this.isFontLoaded = true; }
+    });
     /*this.levels.forEach((level) => {
       this.load.image(`image-${level.id}`, level.image);
     });*/
   }
 
   create() {
-    this.onReady();
+    const retryInterval = setInterval(() => {
+      if (this.isFontLoaded) {
+        this.onReady();
+        clearInterval(retryInterval);
+      }
+    }, 100);
   }
 }
