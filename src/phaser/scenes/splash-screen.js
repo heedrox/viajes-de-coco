@@ -19,9 +19,9 @@ export default class SplashScreen extends Phaser.Scene {
     // load your assets
     //
     console.log(this.levels);
-    this.levels.forEach((level) => {
+    /*this.levels.forEach((level) => {
       this.load.image(`image-${level.id}`, level.image);
-    });
+    });*/
   }
 
   create() {

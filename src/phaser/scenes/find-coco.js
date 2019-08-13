@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 const getRatio = (image, game) => {
   if (game.scale.isGameLandscape) return game.canvas.height / image.height;
@@ -17,7 +17,7 @@ const getClickPercent = (image, tapEvent) => {
 export default class FindCoco extends Phaser.Scene {
 
   constructor(onCocoClick) {
-    super("findCoco");
+    super('findCoco');
     this.onCocoClick = onCocoClick;
   }
 
@@ -25,8 +25,15 @@ export default class FindCoco extends Phaser.Scene {
     this.levelData = data.levelData;
   }
 
+  preload() {
+    console.log('preloading', this.levelData.id);
+    this.textures.remove('backgroundImage');
+    this.load.image(`backgroundImage`, this.levelData.image);
+  }
+
   create() {
-    const image = this.addImage(`image-${this.levelData.id}`);
+    console.log('creating');
+    const image = this.addImage(`backgroundImage`);
     this.scale.lockOrientation('landscape-primary');
 
     this.allowZoomAndMove(image);
@@ -34,8 +41,8 @@ export default class FindCoco extends Phaser.Scene {
   }
 
   addImage(name) {
-    const image = this.add.image(this.game.canvas.width/2, this.game.canvas.height/2, name);
-    image.name = "backgroundImage";
+    const image = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, name);
+    image.name = 'backgroundImage';
     this.game.scale.scaleMode = Phaser.Scale.RESIZE;
     this.game.scale.parentIsWindow = true;
     this.setImageFitWindow(image);
@@ -58,14 +65,14 @@ export default class FindCoco extends Phaser.Scene {
   }
 
   addMoveEvent(image, pinch) {
-    pinch.on('drag1', function(pinch) {
+    pinch.on('drag1', function (pinch) {
       image.x += pinch.drag1Vector.x;
       image.y += pinch.drag1Vector.y;
     }, this);
   }
 
   addZoomEvent(image, pinch) {
-    pinch.on('pinch', function(pinch) {
+    pinch.on('pinch', function (pinch) {
       image.scale *= pinch.scaleFactor;
     }, this);
 
@@ -84,7 +91,7 @@ export default class FindCoco extends Phaser.Scene {
       minTaps: undefined,
       maxTaps: undefined,
     });
-    tap.on('tap', function(tapEvent) {
+    tap.on('tap', function (tapEvent) {
       const { xPercent, yPercent } = getClickPercent(image, tapEvent);
       this.onCocoClick(xPercent, yPercent);
     }, this);

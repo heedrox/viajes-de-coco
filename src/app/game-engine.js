@@ -17,6 +17,6 @@ export default class GameEngine {
 
   onCocoClick(x, y) {
     console.log('coco clicked', x, y);
-    this.presenter.showLevel(this.levels[1])
+    this.presenter.showLevel(this.levels[2])
   }
 }
