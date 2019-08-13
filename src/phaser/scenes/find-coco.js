@@ -45,22 +45,25 @@ export default class FindCoco extends Phaser.Scene {
   }
 
   addTimer() {
-    // if (!this.timerText) {
     const xPos = this.game.canvas.width / 2;
     const yPos = 30;
     this.timerText = this.add.text(xPos, yPos, '10.87', TIMER_CSS);
-    // this.timerText.padding = { left: 10, right: 10, top: 16, bottom: 16 };
     this.timerText.setDepth(10);
     this.timerText.setOrigin(0.5, 0.5);
     this.timerText.setAlign('center');
     this.timerText.setShadow(3, 3, 'rgba(237,117,163,1)', 0);
     this.timerText.setFixedSize(200, 54);
-    //}
+    this.time.addEvent({
+      delay: 10,
+      callback: this.updateTimer.bind(this),
+      loop: true
+    })
   }
 
-  update() {
-    const time = Math.floor((new Date() - this.startDate)/1000);
-    this.timerText.setText(`${time}`);
+  updateTimer() {
+    const time = Math.floor((new Date() - this.startDate)/100)/10;
+    const paddedTime = `${time}`.indexOf('.') < 0 ? `${time}.0` : `${time}`;
+    this.timerText.setText(paddedTime);
   }
 
   addImage(name) {
