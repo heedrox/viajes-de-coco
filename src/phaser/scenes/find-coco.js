@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
-
-const TIMER_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#287cc4', align: 'left' };
+import SceneTimer from './components/scene-timer';
 
 const getRatio = (image, game) => {
   if (game.scale.isGameLandscape) return game.canvas.height / image.height;
@@ -26,45 +25,24 @@ export default class FindCoco extends Phaser.Scene {
   init(data) {
     this.levelData = data.levelData;
     this.startDate = data.startDate;
+    this.failedDate = new Date(1970, 1, 1);
+    this.timer = new SceneTimer(this);
   }
 
   preload() {
-    console.log('preloading', this.levelData.id);
     this.textures.remove('backgroundImage');
     this.load.image(`backgroundImage`, this.levelData.image);
+    this.timer.addTimer(this.startDate);
   }
 
   create() {
-    console.log('creating');
-    this.addTimer();
+
     const image = this.addImage(`backgroundImage`);
     this.scale.lockOrientation('landscape-primary');
-
     this.allowZoomAndMove(image);
     this.listenClicks(image);
   }
 
-  addTimer() {
-    const xPos = this.game.canvas.width / 2;
-    const yPos = 30;
-    this.timerText = this.add.text(xPos, yPos, '10.87', TIMER_CSS);
-    this.timerText.setDepth(10);
-    this.timerText.setOrigin(0.5, 0.5);
-    this.timerText.setAlign('center');
-    this.timerText.setShadow(3, 3, 'rgba(237,117,163,1)', 0);
-    this.timerText.setFixedSize(200, 54);
-    this.time.addEvent({
-      delay: 10,
-      callback: this.updateTimer.bind(this),
-      loop: true
-    })
-  }
-
-  updateTimer() {
-    const time = Math.floor((new Date() - this.startDate)/100)/10;
-    const paddedTime = `${time}`.indexOf('.') < 0 ? `${time}.0` : `${time}`;
-    this.timerText.setText(paddedTime);
-  }
 
   addImage(name) {
     const image = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, name);
@@ -126,7 +104,6 @@ export default class FindCoco extends Phaser.Scene {
 
   failed(failedDate) {
     this.failedDate = failedDate;
-    console.log(this);
     this.cameras.main.flash(500, 255,0, 0);
   }
 }
