@@ -1,23 +1,7 @@
-import Phaser from "phaser";
-import GesturesPlugin from './plugins/gestures-plugin.js';
-import FindCoco from './scenes/find-coco.js';
+import Phaser from 'phaser';
+import { phaserConfig } from './phaser-config';
 import SplashScreen from './scenes/splash-screen';
-
-
-const phaserConfig = (levels, onReady, onCocoClick) => ({
-  type: Phaser.AUTO,
-  parent: "content",
-  width: document.documentElement.clientWidth,
-  height: document.documentElement.clientHeight,
-  scene: [ new SplashScreen(levels, onReady), new FindCoco(onCocoClick) ],
-  plugins: {
-    scene: [{
-      key: 'rexGestures',
-      plugin: GesturesPlugin,
-      mapping: 'rexGestures'
-    }]
-  }
-});
+import FindCoco from './scenes/find-coco';
 
 export default class PhaserPresenter {
   constructor() {
@@ -36,14 +20,17 @@ export default class PhaserPresenter {
   }
 
   start() {
-    const PHASER_CONFIG = phaserConfig(this.levels, this.onReady, this.onCocoClick);
+    const PHASER_CONFIG = phaserConfig([
+      new SplashScreen(this.levels, this.onReady),
+      new FindCoco(this.onCocoClick)
+    ]);
 
     this.game = new Phaser.Game(PHASER_CONFIG);
-    window.game = this.game;
+    window.game = this.game; //debugging purposes
   }
 
   showLevel(levelData, startDate) {
-    this.game.scene.start('findCoco', {levelData, startDate});
+    this.game.scene.start('findCoco', { levelData, startDate });
   }
 
   showScore(score) {
