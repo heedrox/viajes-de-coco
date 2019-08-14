@@ -2,9 +2,9 @@ import Phaser from 'phaser';
 import WebFont from 'webfontloader';
 
 export default class SplashScreen extends Phaser.Scene {
-  constructor(levels, onReady) {
+  constructor(onReady) {
     super("splashScreen");
-    this.levels = levels;
+    // this.levels = levels;
     this.onReady = onReady;
     this.isFontLoaded = false;
   }

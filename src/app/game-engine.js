@@ -10,7 +10,7 @@ export default class GameEngine {
     this.presenter = presenter;
     this.presenter.setOnCocoClick(this.onCocoClick.bind(this));
     this.presenter.setOnReady(this.onReady.bind(this));
-    this.presenter.setLevels(this.levels);
+    this.presenter.setOnMenuStartClicked(this.onMenuStartClicked.bind(this));
     this.startDate = null;
     this.lastFailedDate = null;
   }
@@ -20,6 +20,10 @@ export default class GameEngine {
   }
 
   onReady() {
+    this.presenter.showMenu();
+  }
+
+  onMenuStartClicked() {
     this.startDate = new Date();
     this.numLevel = 0;
     this.showCurrentLevel();
