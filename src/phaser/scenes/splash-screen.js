@@ -21,7 +21,6 @@ export default class SplashScreen extends Phaser.Scene {
 
     this.load.on('progress', function (value) {
       loaderBar.setScale(value, 1);
-      console.log(value);
     });
 
     this.menuImages.forEach((image, key) => {
