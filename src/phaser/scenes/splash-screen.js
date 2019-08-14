@@ -14,7 +14,7 @@ export default class SplashScreen extends Phaser.Scene {
   }
 
   preload() {
-    const loaderBg = this.add.sprite(this.game.scale.width/2, this.game.scale.height/2, 'loaderBg');
+    this.add.sprite(this.game.scale.width/2, this.game.scale.height/2, 'loaderBg');
     const loaderBar = this.add.sprite(this.game.scale.width/2, this.game.scale.height/2, 'loaderBar');
 
     loaderBar.setScale(0, 1);
