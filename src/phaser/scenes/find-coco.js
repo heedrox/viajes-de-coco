@@ -3,11 +3,6 @@ import SceneTimer from './components/scene-timer';
 import SceneImage from './components/scene-image';
 
 
-const getRatio = (image, game) => {
-  if (game.scale.isGameLandscape) return game.canvas.height / image.height;
-  return game.canvas.width / image.width;
-};
-
 const getClickPercent = (image, tapEvent) => {
   const imageLeft = image.x - image.displayWidth * image.originX;
   const imageTop = image.y - image.displayHeight * image.originY;
@@ -25,65 +20,21 @@ export default class FindCoco extends Phaser.Scene {
   }
 
   init(data) {
-    this.levelData = data.levelData;
     this.startDate = data.startDate;
     this.failedDate = new Date(1970, 1, 1);
     this.timer = new SceneTimer(this);
-    this.backgroundImage = new SceneImage(this);
+    this.backgroundImage = new SceneImage(this, data.levelData);
   }
 
   preload() {
-    this.textures.remove('backgroundImage');
-    this.load.image(`backgroundImage`, this.levelData.image);
+    this.backgroundImage.preload();
     this.timer.addTimer(this.startDate);
   }
 
   create() {
-
-    const image = this.addImage(`backgroundImage`);
     this.scale.lockOrientation('landscape-primary');
-    this.allowZoomAndMove(image);
+    const image = this.backgroundImage.create();
     this.listenClicks(image);
-  }
-
-
-  addImage(name) {
-    const image = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, name);
-    image.name = 'backgroundImage';
-    this.game.scale.scaleMode = Phaser.Scale.RESIZE;
-    this.game.scale.parentIsWindow = true;
-    image.setDepth(1);
-    this.setImageFitWindow(image);
-    return image;
-  }
-
-  setImageFitWindow(image) {
-    const ratio = getRatio(image, this.game);
-    image.scale = ratio;
-  }
-
-  allowZoomAndMove(image) {
-    const pinch = this.rexGestures.add.pinch({
-      enable: true,
-      bounds: undefined,
-      threshold: 0,
-    });
-    this.addMoveEvent(image, pinch);
-    this.addZoomEvent(image, pinch);
-  }
-
-  addMoveEvent(image, pinch) {
-    pinch.on('drag1', function (pinch) {
-      image.x += pinch.drag1Vector.x;
-      image.y += pinch.drag1Vector.y;
-    }, this);
-  }
-
-  addZoomEvent(image, pinch) {
-    pinch.on('pinch', function (pinch) {
-      image.scale *= pinch.scaleFactor;
-    }, this);
-
   }
 
   listenClicks(image) {
