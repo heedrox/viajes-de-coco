@@ -9,6 +9,8 @@ export default class GameEngine {
     this.presenter.setOnCocoClick(this.onCocoClick.bind(this));
     this.presenter.setOnReady(this.onReady.bind(this));
     this.presenter.setLevels(this.levels);
+    this.startDate = null;
+    this.lastFailedDate = null;
   }
 
   start() {
@@ -24,9 +26,15 @@ export default class GameEngine {
   onCocoClick(xPercent, yPercent) {
     if (isWithinBounds(this.levels[this.numLevel], xPercent, yPercent)) {
       this.showNextLevel();
+    } else {
+      this.showClickFailed();
     }
   }
 
+  showClickFailed() {
+    this.lastFailedDate = new Date();
+    this.presenter.showClickFailed(this.lastFailedDate);
+  }
   showNextLevel() {
     this.numLevel = this.numLevel + 1;
     if (this.numLevel >= this.levels.length) {

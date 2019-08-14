@@ -50,4 +50,8 @@ export default class PhaserPresenter {
     alert('score: ' + score);
   }
 
+  showClickFailed(failedDate) {
+    this.game.scene.getScene('findCoco').failed(failedDate);
+  }
+
 }

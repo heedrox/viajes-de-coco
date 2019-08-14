@@ -123,4 +123,10 @@ export default class FindCoco extends Phaser.Scene {
       this.onCocoClick(xPercent, yPercent);
     }, this);
   }
+
+  failed(failedDate) {
+    this.failedDate = failedDate;
+    console.log(this);
+    this.cameras.main.flash(500, 255,0, 0);
+  }
 }
