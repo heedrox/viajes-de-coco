@@ -10,7 +10,6 @@ export default class GameEngine {
     this.menuImages = gameData.menuImages;
     this.presenter = presenter;
     this.presenter.setOnCocoClick(this.onCocoClick.bind(this));
-    this.presenter.setOnReady(this.onReady.bind(this));
     this.presenter.setOnMenuStartClicked(this.onMenuStartClicked.bind(this));
     this.presenter.setMenuImages(this.menuImages);
     this.startDate = null;
@@ -18,11 +17,7 @@ export default class GameEngine {
   }
 
   start() {
-    this.presenter.start(this.levels[0]);
-  }
-
-  onReady() {
-    this.presenter.showMenu();
+    this.presenter.start();
   }
 
   onMenuStartClicked() {

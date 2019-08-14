@@ -13,10 +13,6 @@ export default class PhaserPresenter {
     this.onCocoClick = onCocoClick;
   }
 
-  setOnReady(onReady) {
-    this.onReady = onReady;
-  }
-
   setOnMenuStartClicked(onMenuStartClicked) {
     this.onMenuStartClicked = onMenuStartClicked;
   }
@@ -28,7 +24,7 @@ export default class PhaserPresenter {
   start() {
     this.mainMenuScene = new MainMenu(this.menuImages, this.onMenuStartClicked);
     this.findCocoScene = new FindCoco(this.onCocoClick);
-    this.splashScreen = new SplashScreen(this.menuImages, this.onReady);
+    this.splashScreen = new SplashScreen(this.mainMenuScene, this.menuImages, this.onReady);
     this.bootScene = new Boot(this.splashScreen);
     this.game = new Phaser.Game(phaserConfig([
       this.bootScene,
@@ -37,11 +33,6 @@ export default class PhaserPresenter {
       this.findCocoScene
     ]));
     window.game = this.game; //debugging purposes
-  }
-
-  showMenu() {
-    console.log(this.mainMenuScene);
-    this.mainMenuScene.start();
   }
 
   showLevel(levelData, startDate) {

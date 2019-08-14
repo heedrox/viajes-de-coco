@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
 
 export default class SplashScreen extends Phaser.Scene {
-  constructor(menuImages, onReady) {
+  constructor(mainMenuScene, menuImages, onReady) {
     super("splashScreen");
     this.menuImages = menuImages;
-    this.onReady = onReady;
+    this.mainMenuScene = mainMenuScene;
   }
 
   start() {
@@ -27,6 +27,6 @@ export default class SplashScreen extends Phaser.Scene {
   }
 
   create() {
-    this.onReady();
+    this.mainMenuScene.start();
   }
 }
