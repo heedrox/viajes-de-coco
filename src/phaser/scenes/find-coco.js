@@ -1,16 +1,7 @@
 import Phaser from 'phaser';
 import SceneTimer from './components/scene-timer';
 import SceneImage from './components/scene-image';
-
-
-const getClickPercent = (image, tapEvent) => {
-  const imageLeft = image.x - image.displayWidth * image.originX;
-  const imageTop = image.y - image.displayHeight * image.originY;
-
-  const xPercent = (tapEvent.x - imageLeft) / image.displayWidth * 100;
-  const yPercent = (tapEvent.y - imageTop) / image.displayHeight * 100;
-  return { xPercent, yPercent };
-};
+import { allowTap } from './characteristics/allow-tap';
 
 export default class FindCoco extends Phaser.Scene {
 
@@ -33,27 +24,10 @@ export default class FindCoco extends Phaser.Scene {
 
   create() {
     this.scale.lockOrientation('landscape-primary');
-    const image = this.backgroundImage.create();
-    this.listenClicks(image);
-  }
-
-  listenClicks(image) {
-    const tap = this.rexGestures.add.tap(image, {
-      enable: true,
-
-      time: 250,
-      tapInterval: 200,
-      threshold: 9,
-      tapOffset: 10,
-
-      taps: undefined,
-      minTaps: undefined,
-      maxTaps: undefined,
+    this.backgroundImage.create();
+    allowTap(this.backgroundImage.getImage(), this, (coordsPercent) => {
+      this.onCocoClick(coordsPercent.xPercent, coordsPercent.yPercent);
     });
-    tap.on('tap', function (tapEvent) {
-      const { xPercent, yPercent } = getClickPercent(image, tapEvent);
-      this.onCocoClick(xPercent, yPercent);
-    }, this);
   }
 
   failed(failedDate) {

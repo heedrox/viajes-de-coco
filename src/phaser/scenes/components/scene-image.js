@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { allowZoomAndMove } from './characteristics/zoom-move';
+import { allowZoomAndMove } from '../characteristics/allow-zoom-move';
 
 const IMAGE_NAME = "backgroundImage";
 
@@ -20,23 +20,27 @@ export default class SceneImage {
   }
 
   create() {
-    const image = this.addImage();
-    allowZoomAndMove(image, this.scene);
+    this.image = this.addImage();
+    this.setImageFitWindow();
+    allowZoomAndMove(this.image, this.scene);
   }
 
   addImage() {
     const image = this.scene.add.image(this.scene.game.canvas.width / 2, this.scene.game.canvas.height / 2, IMAGE_NAME);
     image.name = IMAGE_NAME;
-    this.scene.game.scale.scaleMode = Phaser.Scale.RESIZE;
-    this.scene.game.scale.parentIsWindow = true;
     image.setDepth(1);
-    this.setImageFitWindow(image);
     return image;
   }
 
-  setImageFitWindow(image) {
-    const ratio = getRatio(image, this.scene.game);
-    image.scale = ratio;
+  setImageFitWindow() {
+    this.scene.game.scale.scaleMode = Phaser.Scale.RESIZE;
+    this.scene.game.scale.parentIsWindow = true;
+    const ratio = getRatio(this.image, this.scene.game);
+    this.image.scale = ratio;
+  }
+
+  getImage() {
+    return this.image;
   }
 
 }
