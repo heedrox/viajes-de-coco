@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 import SceneTimer from './components/scene-timer';
+import SceneImage from './components/scene-image';
+
 
 const getRatio = (image, game) => {
   if (game.scale.isGameLandscape) return game.canvas.height / image.height;
@@ -27,6 +29,7 @@ export default class FindCoco extends Phaser.Scene {
     this.startDate = data.startDate;
     this.failedDate = new Date(1970, 1, 1);
     this.timer = new SceneTimer(this);
+    this.backgroundImage = new SceneImage(this);
   }
 
   preload() {
