@@ -10,6 +10,10 @@ export default class FindCoco extends Phaser.Scene {
     this.onCocoClick = onCocoClick;
   }
 
+  start(levelData, startDate) {
+    this.scene.start(this.scene.key, { levelData, startDate });
+  }
+
   init(data) {
     this.startDate = data.startDate;
     this.failedDate = new Date(1970, 1, 1);

@@ -7,6 +7,10 @@ export default class MainMenu extends Phaser.Scene {
     this.onMenuStartClicked = onMenuStartClicked;
   }
 
+  start() {
+    this.scene.start(this.scene.key);
+  }
+
   init(data) {
   }
 
