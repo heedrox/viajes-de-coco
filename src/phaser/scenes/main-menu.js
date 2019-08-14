@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 export default class MainMenu extends Phaser.Scene {
 
-  constructor(onMenuStartClicked) {
+  constructor(menuImages, onMenuStartClicked) {
     super('mainMenu');
     this.onMenuStartClicked = onMenuStartClicked;
   }
@@ -11,10 +11,8 @@ export default class MainMenu extends Phaser.Scene {
     this.scene.start(this.scene.key);
   }
 
-  init(data) {
-  }
-
   preload() {
+
   }
 
   create() {

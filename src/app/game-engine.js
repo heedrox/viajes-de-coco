@@ -5,12 +5,14 @@ const isWithinBounds = (level, xPercent, yPercent) =>
   (yPercent >= level.cocoTop) && (yPercent <= level.cocoBottom);
 
 export default class GameEngine {
-  constructor(levels, presenter) {
-    this.levels = levels;
+  constructor(gameData, presenter) {
+    this.levels = gameData.levels;
+    this.menuImages = gameData.menuImages;
     this.presenter = presenter;
     this.presenter.setOnCocoClick(this.onCocoClick.bind(this));
     this.presenter.setOnReady(this.onReady.bind(this));
     this.presenter.setOnMenuStartClicked(this.onMenuStartClicked.bind(this));
+    this.presenter.setMenuImages(this.menuImages);
     this.startDate = null;
     this.lastFailedDate = null;
   }

@@ -1,24 +1,25 @@
-import image1 from './images/levels/1.jpg'
-import image2 from './images/levels/2.jpg'
-import image3 from './images/levels/3.jpg'
-import image4 from './images/levels/4.jpg'
-import image5 from './images/levels/5.jpg'
-import image6 from './images/levels/6.jpg'
-import image7 from './images/levels/7.jpg'
-import image8 from './images/levels/8.jpg'
-import image9 from './images/levels/9.jpg'
-import image10 from './images/levels/10.jpg'
-import image11 from './images/levels/11.jpg'
-import image12 from './images/levels/12.jpg'
-import image13 from './images/levels/13.jpg'
-import image14 from './images/levels/14.jpg'
-import image15 from './images/levels/15.jpg'
-import image16 from './images/levels/16.jpg'
-import image17 from './images/levels/17.jpg'
-import image18 from './images/levels/18.jpg'
+import image1 from './1.jpg'
+import image2 from './2.jpg'
+import image3 from './3.jpg'
+import image4 from './4.jpg'
+import image5 from './5.jpg'
+import image6 from './6.jpg'
+import image7 from './7.jpg'
+import image8 from './8.jpg'
+import image9 from './9.jpg'
+import image10 from './10.jpg'
+import image11 from './11.jpg'
+import image12 from './12.jpg'
+import image13 from './13.jpg'
+import image14 from './14.jpg'
+import image15 from './15.jpg'
+import image16 from './16.jpg'
+import image17 from './17.jpg'
+import image18 from './18.jpg'
 
 const aLevel = (id, image, cocoLeft, cocoTop, cocoRight, cocoBottom) =>
   ({ id, image, cocoLeft, cocoTop, cocoRight, cocoBottom });
+
 
 const LEVELS = [
   aLevel(1, image1, 79, 61, 81, 64),
@@ -39,7 +40,6 @@ const LEVELS = [
   aLevel(16, image16, 68, 35, 72, 40),
   aLevel(17, image17, 62, 75, 65, 80),
   aLevel(18, image18, 52, 48, 57, 53),
-
 ];
 
 export default LEVELS;

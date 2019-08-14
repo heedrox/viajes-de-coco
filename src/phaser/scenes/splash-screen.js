@@ -2,41 +2,34 @@ import Phaser from 'phaser';
 import WebFont from 'webfontloader';
 
 export default class SplashScreen extends Phaser.Scene {
-  constructor(onReady) {
+  constructor(menuImages, onReady) {
     super("splashScreen");
-    // this.levels = levels;
+    this.menuImages = menuImages;
     this.onReady = onReady;
     this.isFontLoaded = false;
   }
 
-  preload() {
-/*
-    this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg');
-    this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar');
-    centerGameObjects([this.loaderBg, this.loaderBar]);
+  start() {
+    this.scene.start(this.scene.key);
+  }
 
-    this.load.setPreloadSprite(this.loaderBar);
-*/
-    //
-    // load your assets
-    //
-    WebFont.load({
-      google: {
-        families: ['Bangers'],
-      },
-      active: () => { this.isFontLoaded = true; }
+  preload() {
+    const loaderBg = this.add.sprite(this.game.scale.width/2, this.game.scale.height/2, 'loaderBg');
+    const loaderBar = this.add.sprite(this.game.scale.width/2, this.game.scale.height/2, 'loaderBar');
+
+    loaderBar.setScale(0, 1);
+
+    this.load.on('progress', function (value) {
+      loaderBar.setScale(value, 1);
+      console.log(value);
     });
-    /*this.levels.forEach((level) => {
-      this.load.image(`image-${level.id}`, level.image);
-    });*/
+
+    this.menuImages.forEach((image, key) => {
+      this.load.image(`menu-image-${key}`, image);
+    });
   }
 
   create() {
-    const retryInterval = setInterval(() => {
-      if (this.isFontLoaded) {
-        this.onReady();
-        clearInterval(retryInterval);
-      }
-    }, 100);
+    this.onReady();
   }
 }

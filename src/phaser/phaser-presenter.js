@@ -3,6 +3,7 @@ import { phaserConfig } from './phaser-config';
 import SplashScreen from './scenes/splash-screen';
 import FindCoco from './scenes/find-coco';
 import MainMenu from './scenes/main-menu';
+import Boot from './scenes/boot';
 
 export default class PhaserPresenter {
   constructor() {
@@ -20,16 +21,21 @@ export default class PhaserPresenter {
     this.onMenuStartClicked = onMenuStartClicked;
   }
 
+  setMenuImages(menuImages) {
+    this.menuImages = menuImages;
+  }
+
   start() {
-    this.mainMenuScene = new MainMenu(this.onMenuStartClicked);
+    this.mainMenuScene = new MainMenu(this.menuImages, this.onMenuStartClicked);
     this.findCocoScene = new FindCoco(this.onCocoClick);
-    const PHASER_CONFIG = phaserConfig([
-      new SplashScreen(this.onReady),
+    this.splashScreen = new SplashScreen(this.menuImages, this.onReady);
+    this.bootScene = new Boot(this.splashScreen);
+    this.game = new Phaser.Game(phaserConfig([
+      this.bootScene,
+      this.splashScreen,
       this.mainMenuScene,
       this.findCocoScene
-    ]);
-
-    this.game = new Phaser.Game(PHASER_CONFIG);
+    ]));
     window.game = this.game; //debugging purposes
   }
 
