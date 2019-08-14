@@ -31,7 +31,7 @@ export default class FindCoco extends Phaser.Scene {
   }
 
   failed(failedDate) {
-    this.failedDate = failedDate;
     this.cameras.main.flash(500, 255,0, 0);
+    this.timer.setFailedDate(failedDate);
   }
 }

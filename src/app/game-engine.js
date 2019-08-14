@@ -1,3 +1,5 @@
+import { isFailed } from '../phaser/scenes/util/is-failed';
+
 const isWithinBounds = (level, xPercent, yPercent) =>
   (xPercent >= level.cocoLeft) && (xPercent <= level.cocoRight) &&
   (yPercent >= level.cocoTop) && (yPercent <= level.cocoBottom);
@@ -24,6 +26,7 @@ export default class GameEngine {
   }
 
   onCocoClick(xPercent, yPercent) {
+    if (isFailed(this.lastFailedDate)) return;
     if (isWithinBounds(this.levels[this.numLevel], xPercent, yPercent)) {
       this.showNextLevel();
     } else {
