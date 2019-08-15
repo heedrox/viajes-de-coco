@@ -24,10 +24,12 @@ export default class FullScreenImage {
   }
 
   addImage() {
-    const image = this.scene.add.image(this.offset + (this.scene.game.canvas.width / 2), this.scene.game.canvas.height / 2, this.name);
+    const positionX = (this.offset === 0) ? (this.scene.game.canvas.width / 2) : this.offset;
+    const originX = (this.offset === 0) ? 0.5 : 0;
+    const image = this.scene.add.image(positionX, this.scene.game.canvas.height / 2, this.name);
     image.name = this.name;
     image.setDepth(1);
-    image.setOrigin(0.5, 0.5);
+    image.setOrigin(originX, 0.5);
     return image;
   }
 

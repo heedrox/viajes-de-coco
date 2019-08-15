@@ -15,6 +15,25 @@ export default class MainMenu extends Phaser.Scene {
   preload() {
   }
 
+  create() {
+    let lastImageXPos = 0;
+    this.menuImages.forEach((menuImage, pos) => {
+      const image = new FullScreenImage(this, menuImage, lastImageXPos, `menu-image-${pos}`);
+      image.create();
+      console.log(image.getImage());
+      lastImageXPos = image.getImage().x + (image.getImage().displayWidth * (1-image.getImage().originX));
+    });
+  }
+
+  addText() {
+    const text = this.add.text(this.scale.width / 2, this.scale.height / 2, '¡EMPEZAR!', TEXT_CSS);
+    this.style(text);
+    text.setInteractive().on('pointerup', () => {
+      this.onMenuStartClicked();
+    })
+
+  }
+
   style(text) {
     text.setDepth(10);
     text.setOrigin(0.5, 0.5);
@@ -22,19 +41,4 @@ export default class MainMenu extends Phaser.Scene {
     text.setFixedSize(200, 54);
   }
 
-  create() {
-    const text = this.add.text(this.scale.width / 2, this.scale.height / 2, '¡EMPEZAR!', TEXT_CSS);
-    let lastImage = null;
-    this.menuImages.forEach((menuImage, pos) => {
-      console.log(lastImage ? lastImage.getImage() : null);
-      const image = new FullScreenImage(this, menuImage, lastImage ? lastImage.getImage().displayWidth : 0, `menu-image-${pos}`);
-      image.create();
-      lastImage = image;
-
-    });
-    this.style(text);
-    text.setInteractive().on('pointerup', () => {
-      this.onMenuStartClicked();
-    })
-  }
 }
