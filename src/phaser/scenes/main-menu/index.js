@@ -7,8 +7,8 @@ export default class Index extends Phaser.Scene {
   constructor(menuImagesList, onMenuStartClicked) {
     super('mainMenu');
     this.menuImages = new MenuImages(this, menuImagesList);
-    this.onMenuStartClicked = onMenuStartClicked;
     this.menuText = new MenuText(this);
+    this.onMenuStartClicked = onMenuStartClicked;
   }
 
   create() {
