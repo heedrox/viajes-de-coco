@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import FullScreenImage from './components/full-screen-image';
 
 const TEXT_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#287cc4', align: 'center' };
 const MAGENTA_COLOR = 'rgba(237,117,163,1)';
@@ -23,8 +24,13 @@ export default class MainMenu extends Phaser.Scene {
 
   create() {
     const text = this.add.text(this.scale.width / 2, this.scale.height / 2, '¡EMPEZAR!', TEXT_CSS);
+    let lastImage = null;
     this.menuImages.forEach((menuImage, pos) => {
-      this.add.image()
+      console.log(lastImage ? lastImage.getImage() : null);
+      const image = new FullScreenImage(this, menuImage, lastImage ? lastImage.getImage().displayWidth : 0, `menu-image-${pos}`);
+      image.create();
+      lastImage = image;
+
     });
     this.style(text);
     text.setInteractive().on('pointerup', () => {

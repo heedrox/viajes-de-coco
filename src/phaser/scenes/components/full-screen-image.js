@@ -6,10 +6,10 @@ const getRatio = (image, game) => {
 };
 
 export default class FullScreenImage {
-  constructor(scene, imageSrc, position, name) {
+  constructor(scene, imageSrc, offset, name) {
     this.scene = scene;
     this.imageSrc = imageSrc;
-    this.position = position; //position 0 is the first one, centered
+    this.offset = offset; //0 is centered
     this.name = name;
   }
 
@@ -24,7 +24,7 @@ export default class FullScreenImage {
   }
 
   addImage() {
-    const image = this.scene.add.image((2*this.position+1) * this.scene.game.canvas.width / 2, this.scene.game.canvas.height / 2, this.name);
+    const image = this.scene.add.image(this.offset + (this.scene.game.canvas.width / 2), this.scene.game.canvas.height / 2, this.name);
     image.name = this.name;
     image.setDepth(1);
     image.setOrigin(0.5, 0.5);
