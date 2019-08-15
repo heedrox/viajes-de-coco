@@ -31,9 +31,8 @@ export default class Boot extends Phaser.Scene {
   create() {
     const retryInterval = setInterval(() => {
       if (this.isFontLoaded) {
-        console.log(this.nextScene);
-        this.nextScene.start();
         clearInterval(retryInterval);
+        this.scene.start(this.nextScene.scene.key);
       }
     }, 100);
   }
