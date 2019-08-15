@@ -16,7 +16,6 @@ export default class FindCoco extends Phaser.Scene {
 
   init(data) {
     this.startDate = data.startDate;
-    this.failedDate = new Date(1970, 1, 1);
     this.timer = new SceneTimer(this);
     this.backgroundImage = new SceneImage(this, data.levelData);
   }

@@ -36,7 +36,8 @@ export default class PhaserPresenter {
   }
 
   showLevel(levelData, startDate) {
-    this.findCocoScene.start(levelData, startDate);
+    console.log(this.game.scene.scenes.filter(x => x.scene.isActive()));
+    this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene.start(this.findCocoScene.scene.key, { levelData, startDate });
   }
 
   showScore(score) {

@@ -14,6 +14,9 @@ export default class MainMenu extends Phaser.Scene {
 
     const text = this.add.text(this.scale.width / 2, this.scale.height / 2, '¡EMPEZAR!', TEXT_CSS);
     this.style(text);
+    text.setInteractive().on('pointerup', () => {
+      this.onMenuStartClicked();
+    })
   }
 
   style(text) {
@@ -22,11 +25,4 @@ export default class MainMenu extends Phaser.Scene {
     text.setShadow(3, 3, MAGENTA_COLOR, 0);
     text.setFixedSize(200, 54);
   }
-
-
-  create() {
-
-    // this.onMenuStartClicked();
-  }
-
 }
