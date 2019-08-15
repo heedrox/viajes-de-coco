@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
-import FullScreenImage from './components/full-screen-image';
+import FullScreenImage from '../components/full-screen-image';
 
 const TEXT_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#287cc4', align: 'center' };
 const MAGENTA_COLOR = 'rgba(237,117,163,1)';
 
-export default class MainMenu extends Phaser.Scene {
+export default class Index extends Phaser.Scene {
 
   constructor(menuImages, onMenuStartClicked) {
     super('mainMenu');
