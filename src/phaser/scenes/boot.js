@@ -18,7 +18,8 @@ export default class Boot extends Phaser.Scene {
       google: {
         families: ['Bangers'],
       },
-      active: () => { this.isFontLoaded = true; }
+      active: () => { this.isFontLoaded = true; },
+      inactive: () => { this.isFontLoaded = true; }
     });
 
     const text = this.add.text(this.game.scale.width/2, this.game.scale.height/2, '...', { font: '16px Arial', fill: '#dddddd', align: 'center' });
