@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { phaserConfig } from './phaser-config';
 import SplashScreen from './scenes/splash-screen';
 import FindCoco from './scenes/find-coco';
-import MainMenu from './scenes/main-menu';
+import MainMenu from './scenes/main-menu/';
 import Boot from './scenes/boot';
 
 export default class PhaserPresenter {
@@ -36,8 +36,8 @@ export default class PhaserPresenter {
   }
 
   showLevel(levelData, startDate) {
-    console.log(this.game.scene.scenes.filter(x => x.scene.isActive()));
-    this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene.start(this.findCocoScene.scene.key, { levelData, startDate });
+    const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene;
+    currentActiveScene.start(this.findCocoScene.scene.key, { levelData, startDate });
   }
 
   showScore(score) {
@@ -45,7 +45,7 @@ export default class PhaserPresenter {
   }
 
   showClickFailed(failedDate) {
-    this.game.scene.getScene('findCoco').failed(failedDate);
+    this.game.scene.getScene(this.findCocoScene.scene.key).failed(failedDate);
   }
 
 }
