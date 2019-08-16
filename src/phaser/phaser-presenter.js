@@ -45,6 +45,7 @@ export default class PhaserPresenter {
 
   showQuestion(levelData, questions, startDate) {
     const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene;
+    console.log('going to show questions');
     currentActiveScene.start(this.questionScene.scene.key, { levelData, questions, startDate });
   }
 
