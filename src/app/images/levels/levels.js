@@ -16,8 +16,8 @@ import image16 from './16.jpg'
 import image17 from './17.jpg'
 import image18 from './18.jpg'
 
-const aLevel = (id, image, cocoLeft, cocoTop, cocoRight, cocoBottom) =>
-  ({ id, image, cocoLeft, cocoTop, cocoRight, cocoBottom });
+const aLevel = (id, image, cocoLeft, cocoTop, cocoRight, cocoBottom, description) =>
+  ({ id, image, cocoLeft, cocoTop, cocoRight, cocoBottom, description });
 
 
 const LEVELS = [

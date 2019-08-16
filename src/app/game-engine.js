@@ -1,4 +1,5 @@
-import { isFailed } from '../phaser/scenes/util/is-failed';
+import { isFailed } from './util/is-failed';
+import { shuffleArray } from './util/shuffle-array';
 
 const isWithinBounds = (level, xPercent, yPercent) =>
   (xPercent >= level.cocoLeft) && (xPercent <= level.cocoRight) &&
@@ -14,6 +15,7 @@ export default class GameEngine {
     this.presenter.setMenuImages(this.menuImages);
     this.startDate = null;
     this.lastFailedDate = null;
+    this.numLevel = 0;
   }
 
   start() {
@@ -36,15 +38,17 @@ export default class GameEngine {
   }
 
   showQuestion() {
-    // const otherQuestions = this.levels[this.numLevel]
-    // this.presenter.showQuestion(this.levels[this.numLevel].question, this.startDate);
-    this.showNextLevel();
+    const questions = this.levels.map(q => q.description);
+    const otherUniqueQuestions = questions.filter((v,i) => (questions.indexOf(v) === i) && (i !== this.numLevel));
+    shuffleArray(otherUniqueQuestions);
+    this.presenter.showQuestion(this.levels[this.numLevel].description, otherUniqueQuestions, this.startDate);
   }
 
   showClickFailed() {
     this.lastFailedDate = new Date();
     this.presenter.showClickFailed(this.lastFailedDate);
   }
+
 
   showNextLevel() {
     this.numLevel = this.numLevel + 1;

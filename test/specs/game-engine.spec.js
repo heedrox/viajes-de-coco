@@ -1,8 +1,14 @@
 import GameEngine from '../../src/app/game-engine';
 
+const EMPTY_PRESENTER = {
+  setOnCocoClick: () => {},
+  setOnMenuStartClicked: () => {},
+  setMenuImages: () => {},
+};
+
 describe("Game Engine", function() {
   it("builds", function() {
-    const gameEngine = new GameEngine({}, {});
-    expect(gameEngine).to.be.undefined;
+    const gameEngine = new GameEngine({}, EMPTY_PRESENTER);
+    expect(gameEngine).not.to.be.undefined;
   });
 });
