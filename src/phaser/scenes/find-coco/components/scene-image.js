@@ -1,5 +1,5 @@
-import { allowZoomAndMove } from '../../characteristics/allow-zoom-move';
-import FullScreenImage from '../../components/full-screen-image';
+import { allowZoomAndMove } from '../../common/characteristics/allow-zoom-move';
+import FullScreenImage from '../../common/components/full-screen-image';
 
 const IMAGE_NAME = "backgroundImage";
 

@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
-import SceneTimer from './components/scene-timer';
+import SceneTimer from '../common/components/scene-timer';
 import SceneImage from './components/scene-image';
-import { allowTap } from '../characteristics/allow-tap';
+import { allowTap } from '../common/characteristics/allow-tap';
 
 export default class FindCoco extends Phaser.Scene {
 

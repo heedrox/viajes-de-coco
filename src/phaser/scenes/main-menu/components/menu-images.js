@@ -1,4 +1,4 @@
-import FullScreenImage from '../../components/full-screen-image';
+import FullScreenImage from '../../common/components/full-screen-image';
 
 const getLastImageXPos = phImage => phImage.x + (phImage.displayWidth * (1-phImage.originX));
 
