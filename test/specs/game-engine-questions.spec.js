@@ -32,7 +32,7 @@ describe("Game Engine - Questions", function() {
     gameEngine.showQuestion();
 
     expect(gameEngine.presenter.showQuestion.callCount).to.equal(1);
-    const otherQuestions = gameEngine.presenter.showQuestion.getCall(0).args[0];
+    const otherQuestions = gameEngine.presenter.showQuestion.getCall(0).args[1];
     expect(otherQuestions.length).to.equal(4);
     expect(otherQuestions.filter(q => q.indexOf('REAL_DESCRIPTION') >= 0).length).to.equal(1);
     expect(otherQuestions.filter(q => q.indexOf('FALSE_DESC') !== -1).length).to.equal(3);

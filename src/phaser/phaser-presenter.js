@@ -43,9 +43,9 @@ export default class PhaserPresenter {
     currentActiveScene.start(this.findCocoScene.scene.key, { levelData, startDate });
   }
 
-  showQuestion() {
+  showQuestion(levelData, questions, startDate) {
     const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene;
-    currentActiveScene.start(this.questionScene.scene.key, { levelData, startDate });
+    currentActiveScene.start(this.questionScene.scene.key, { levelData, questions, startDate });
   }
 
   showScore(score) {

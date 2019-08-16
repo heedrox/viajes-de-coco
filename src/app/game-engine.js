@@ -44,7 +44,7 @@ export default class GameEngine {
     const finalQuestions = uniqueQuestionsWithoutOriginal.slice(0,3);
     finalQuestions.push(this.levels[this.numLevel].description);
     shuffleArray(finalQuestions);
-    this.presenter.showQuestion(finalQuestions, this.startDate);
+    this.presenter.showQuestion(this.levels[this.numLevel], finalQuestions, this.startDate);
   }
 
   showClickFailed() {
