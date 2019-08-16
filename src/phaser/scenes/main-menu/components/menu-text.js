@@ -1,5 +1,5 @@
-const TEXT_CSS = { fontFamily: 'Bangers', font: '12vh Bangers', fill: '#287cc4', align: 'center' };
-const TEXT_MAGENTA_CSS = { fontFamily: 'Bangers', font: '12vh Bangers', fill: 'rgba(237,117,163,1)', align: 'center' };
+const TEXT_CSS = size => ({ fontFamily: 'Bangers', font: `${size}vh Bangers`, fill: '#287cc4', align: 'center' });
+const TEXT_MAGENTA_CSS = size => ({ fontFamily: 'Bangers', font: `${size}vh Bangers`, fill: 'rgba(237,117,163,1)', align: 'center' });
 const MAGENTA_COLOR = 'rgba(237,117,163,1)';
 
 const TEXTS =  {
@@ -7,48 +7,48 @@ const TEXTS =  {
   subtitle: 'BRETAÑA y NORMANDÍA',
   start: '¡EMPEZAR!'
 };
+
+const FIRST_BOUNCE = text => ({
+  targets: text,
+  x: text.x - 3,
+  y: text.y - 3,
+  duration: 100,
+  delay: 0,
+  ease: 'Bounce.easeInOut',
+  yoyo: true,
+  loop: -1,
+  repeat: -1,
+  repeatDelay: 2000,
+});
+
+const SECOND_BOUNCE = text=> ({
+  targets: text,
+  x: text.x - 2,
+  y: text.y - 2,
+  duration: 100,
+  delay: 300,
+  ease: 'Bounce.easeInOut',
+  yoyo: true,
+  loop: -1,
+  repeat: -1,
+  repeatDelay: 2000,
+});
+
 export default class MenuText {
   constructor(scene) {
     this.scene = scene;
   }
 
   create(onMenuStartClicked) {
-    const title = this.scene.add.text(this.scene.scale.width / 2, 1 * this.scene.scale.height/ 6, TEXTS.title, TEXT_CSS);
-    const subtitle = this.scene.add.text(this.scene.scale.width / 2, 2 * this.scene.scale.height/ 6, TEXTS.subtitle, TEXT_CSS);
-    const textShadow = this.scene.add.text(this.scene.scale.width / 2 + 3, 5 * this.scene.scale.height / 6 + 3, TEXTS.start, TEXT_MAGENTA_CSS);
-    const text = this.scene.add.text(this.scene.scale.width / 2, 5 * this.scene.scale.height / 6, TEXTS.start, TEXT_CSS);
+    const title = this.scene.add.text(this.scene.scale.width / 2, 1 * this.scene.scale.height/ 6, TEXTS.title, TEXT_CSS(10));
+    const subtitle = this.scene.add.text(this.scene.scale.width / 2, 2 * this.scene.scale.height/ 6, TEXTS.subtitle, TEXT_CSS(14));
+    const textShadow = this.scene.add.text(this.scene.scale.width / 2 + 3, 5 * this.scene.scale.height / 6 + 3, TEXTS.start, TEXT_MAGENTA_CSS(12));
+    const text = this.scene.add.text(this.scene.scale.width / 2, 5 * this.scene.scale.height / 6, TEXTS.start, TEXT_CSS(12));
 
     this.style([title, subtitle], true);
     this.style([text, textShadow], false);
-    console.log(text);
-    let tweenCounter = {
-      x: 0,
-      y: 0
-    };
-    this.scene.tweens.add({
-      targets: text,
-      x: text.x - 3,
-      y: text.y - 3,
-      duration: 100,
-      delay: 0,
-      ease: 'Bounce.easeInOut',
-      yoyo: true,
-      loop: -1,
-      repeat: -1,
-      repeatDelay: 2000,
-    });
-    this.scene.tweens.add({
-      targets: text,
-      x: text.x - 2,
-      y: text.y - 2,
-      duration: 100,
-      delay: 300,
-      ease: 'Bounce.easeInOut',
-      yoyo: true,
-      loop: -1,
-      repeat: -1,
-      repeatDelay: 2000,
-    });
+    this.scene.tweens.add(FIRST_BOUNCE(text));
+    this.scene.tweens.add(SECOND_BOUNCE(text));
     text.setInteractive().on('pointerup', () => {
       onMenuStartClicked();
     })
