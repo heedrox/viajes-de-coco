@@ -23,7 +23,7 @@ export default class GameEngine {
   onMenuStartClicked() {
     this.startDate = new Date();
     this.numLevel = 0;
-    this.showCurrentLevel();
+    this.showLevel(this.numLevel);
   }
 
   onCocoClick(xPercent, yPercent) {
@@ -39,17 +39,18 @@ export default class GameEngine {
     this.lastFailedDate = new Date();
     this.presenter.showClickFailed(this.lastFailedDate);
   }
+
   showNextLevel() {
     this.numLevel = this.numLevel + 1;
     if (this.numLevel >= this.levels.length) {
       this.endGame();
     } else {
-      this.showCurrentLevel();
+      this.showLevel(this.numLevel);
     }
   }
 
-  showCurrentLevel() {
-    this.presenter.showLevel(this.levels[this.numLevel], this.startDate)
+  showLevel(numLevel) {
+    this.presenter.showLevel(this.levels[numLevel], this.startDate)
   }
 
   endGame() {
