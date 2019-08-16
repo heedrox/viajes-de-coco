@@ -39,9 +39,12 @@ export default class GameEngine {
 
   showQuestion() {
     const questions = this.levels.map(q => q.description);
-    const otherUniqueQuestions = questions.filter((v,i) => (questions.indexOf(v) === i) && (i !== this.numLevel));
-    shuffleArray(otherUniqueQuestions);
-    this.presenter.showQuestion(this.levels[this.numLevel].description, otherUniqueQuestions, this.startDate);
+    const uniqueQuestionsWithoutOriginal = questions.filter((v,i) => (questions.indexOf(v) === i) && (i !== this.numLevel));
+    shuffleArray(uniqueQuestionsWithoutOriginal);
+    const finalQuestions = uniqueQuestionsWithoutOriginal.slice(0,3);
+    finalQuestions.push(this.levels[this.numLevel].description);
+    shuffleArray(finalQuestions);
+    this.presenter.showQuestion(finalQuestions, this.startDate);
   }
 
   showClickFailed() {

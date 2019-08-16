@@ -4,10 +4,11 @@ const aLevel = (id, image, cocoLeft, cocoTop, cocoRight, cocoBottom, description
   ({ id, image, cocoLeft, cocoTop, cocoRight, cocoBottom, description });
 
 const LEVELS = [
-  aLevel(0, '', 0, 0, 0, 0, 'description0'),
-  aLevel(1, '', 0, 0, 0, 0, 'description1'),
-  aLevel(2, '', 0, 0, 0, 0, 'description2'),
-  aLevel(3, '', 0, 0, 0, 0, 'description3'),
+  aLevel(0, '', 0, 0, 0, 0, 'FALSE_DESCR_1'),
+  aLevel(1, '', 0, 0, 0, 0, 'REAL_DESCRIPTION'),
+  aLevel(2, '', 0, 0, 0, 0, 'FALSE_DESCR_2'),
+  aLevel(3, '', 0, 0, 0, 0, 'FALSE_DESCR_3'),
+  aLevel(4, '', 0, 0, 0, 0, 'FALSE_DESCR_4'),
 ];
 
 describe("Game Engine - Questions", function() {
@@ -24,28 +25,16 @@ describe("Game Engine - Questions", function() {
     presenterMock.showQuestion = sinon.spy();
   });
 
-  it("Asks presenter to show questions with question of level", function() {
-    const gameEngine = new GameEngine({ levels: LEVELS }, presenterMock);
-    gameEngine.numLevel = 1;
-
-    gameEngine.showQuestion();
-
-
-    expect(gameEngine.presenter.showQuestion.callCount).to.equal(1);
-    expect(gameEngine.presenter.showQuestion.getCall(0).args[0]).to.equal('description1');
-  });
-
-  it("Asks presenter to show questions with other questions", function() {
+  it("shows questions with real question and other 3", function() {
     const gameEngine = new GameEngine({ levels: LEVELS }, presenterMock);
     gameEngine.numLevel = 1;
 
     gameEngine.showQuestion();
 
     expect(gameEngine.presenter.showQuestion.callCount).to.equal(1);
-    const otherQuestions = gameEngine.presenter.showQuestion.getCall(0).args[1];
-    expect(otherQuestions).to.contains('description0');
-    expect(otherQuestions).to.contains('description2');
-    expect(otherQuestions).to.contains('description3');
-    expect(otherQuestions).not.to.contains('description1');
+    const otherQuestions = gameEngine.presenter.showQuestion.getCall(0).args[0];
+    expect(otherQuestions.length).to.equal(4);
+    expect(otherQuestions.filter(q => q.indexOf('REAL_DESCRIPTION') >= 0).length).to.equal(1);
+    expect(otherQuestions.filter(q => q.indexOf('FALSE_DESC') !== -1).length).to.equal(3);
   });
 });
