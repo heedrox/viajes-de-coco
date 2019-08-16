@@ -1,4 +1,4 @@
-import { isFailed } from '../util/is-failed';
+import { isFailed } from '../../util/is-failed';
 
 const TIMER_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#287cc4', align: 'center' };
 const FAILED_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#Ac2800', align: 'center' };
