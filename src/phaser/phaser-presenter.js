@@ -4,6 +4,7 @@ import SplashScreen from './scenes/splash-screen';
 import FindCoco from './scenes/find-coco/';
 import MainMenu from './scenes/main-menu/';
 import Boot from './scenes/boot';
+import QuestionScene from './scenes/question-scene';
 
 export default class PhaserPresenter {
   constructor() {
@@ -26,11 +27,13 @@ export default class PhaserPresenter {
     this.findCocoScene = new FindCoco(this.onCocoClick);
     this.splashScreen = new SplashScreen(this.mainMenuScene, this.menuImages);
     this.bootScene = new Boot(this.splashScreen);
+    this.questionScene = new QuestionScene();
     this.game = new Phaser.Game(phaserConfig([
       this.bootScene,
       this.splashScreen,
       this.mainMenuScene,
-      this.findCocoScene
+      this.findCocoScene,
+      this.questionScene
     ]));
     window.game = this.game; //debugging purposes
   }
@@ -38,6 +41,11 @@ export default class PhaserPresenter {
   showLevel(levelData, startDate) {
     const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene;
     currentActiveScene.start(this.findCocoScene.scene.key, { levelData, startDate });
+  }
+
+  showQuestion() {
+    const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene;
+    currentActiveScene.start(this.questionScene.scene.key, { levelData, startDate });
   }
 
   showScore(score) {

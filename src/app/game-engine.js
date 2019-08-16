@@ -29,10 +29,16 @@ export default class GameEngine {
   onCocoClick(xPercent, yPercent) {
     if (isFailed(this.lastFailedDate)) return;
     if (isWithinBounds(this.levels[this.numLevel], xPercent, yPercent)) {
-      this.showNextLevel();
+      this.showQuestion();
     } else {
       this.showClickFailed();
     }
+  }
+
+  showQuestion() {
+    // const otherQuestions = this.levels[this.numLevel]
+    // this.presenter.showQuestion(this.levels[this.numLevel].question, this.startDate);
+    this.showNextLevel();
   }
 
   showClickFailed() {
