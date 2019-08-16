@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack/prod.js ",
     "start": "webpack-dev-server --config webpack/base.js --open --host 0.0.0.0",
-    "test": "mocha --require @babel/register --require ./test/common.js --require source-map-support/register 'test/specs/*.spec.js' test/specs/*.spec.js",
+    "test": "mocha --require ./test/common.js --require source-map-support/register --require @babel/register 'test/specs/*.spec.js' test/specs/*.spec.js",
     "tdd": "npm run test -- -w"
   },
   "repository": {
