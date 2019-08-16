@@ -1,8 +1,31 @@
 import FullScreenImage from '../../components/full-screen-image';
 
 const getLastImageXPos = phImage => phImage.x + (phImage.displayWidth * (1-phImage.originX));
-const GROUP_CONFIG = {
-  classType: Phaser.GameObjects.Image
+
+const MOVE_LEFT = (container, x, callback) => ({
+  targets: container,
+  x: `-=${x}`,
+  duration: 300,
+  loop: false,
+  ease: 'Sine.easeInOut',
+  delay: 5000,
+  onComplete: callback,
+});
+
+const moveNextImage = (scene, container, movementWidths, imageNumber) => {
+  if (imageNumber === movementWidths.length - 1) {
+    container.x = 0;
+    imageNumber = 0;
+  }
+  scene.tweens.add(MOVE_LEFT(container, movementWidths[imageNumber], () => { moveNextImage(scene, container, movementWidths, imageNumber+1) }));
+};
+
+const buildContainer = (scene, images) => {
+  const container = scene.add.container(0,0);
+  images.forEach((image) => {
+    container.add(image);
+  });
+  return container;
 };
 
 export default class MenuImages {
@@ -12,10 +35,10 @@ export default class MenuImages {
   }
 
   create() {
-    const group = this.scene.add.group(GROUP_CONFIG);
-    group.addMultiple(this.addRightImages());
-    group.addMultiple(this.addLeftImages());
-    this.addAnimation(group);
+
+    const leftImages = this.addRightImages();
+    const rightImages = this.addLeftImages();
+    this.addAnimation(leftImages.concat(rightImages));
   }
 
   addRightImages() {
@@ -47,7 +70,10 @@ export default class MenuImages {
     return images;
   }
 
-  addAnimation(group) {
-
+  addAnimation(images) {
+    const container = buildContainer(this.scene, images);
+    const movementWidths = images.map((image, pos) => images[pos + 1] ? (images[pos].displayWidth + images[pos + 1].displayWidth)/2 : 0).slice(0, this.menuImagesList.length);
+    moveNextImage(this.scene, container, movementWidths, 0);
   }
+
 }
