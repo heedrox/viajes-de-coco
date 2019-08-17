@@ -15,8 +15,9 @@ export default class FullScreenImage {
   }
 
   preload() {
-    this.scene.textures.remove(this.name);
-    this.scene.load.image(this.name, this.imageSrc);
+    if (!this.scene.game.textures.exists(this.textureName)) {
+      this.scene.load.image(this.name, this.imageSrc);
+    }
   }
 
   create() {

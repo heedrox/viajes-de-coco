@@ -1,11 +1,10 @@
 import { allowZoomAndMove } from '../../common/characteristics/allow-zoom-move';
 import FullScreenImage from '../../common/components/full-screen-image';
 
-const IMAGE_NAME = "backgroundImage";
-
 export default class SceneImage extends FullScreenImage {
   constructor(scene, levelData) {
-    super(scene, levelData.image, 0, IMAGE_NAME, IMAGE_NAME);
+    const imageName = `background-image-${levelData.id}`;
+    super(scene, levelData.image, 0, imageName, imageName);
     this.scene = scene;
   }
 

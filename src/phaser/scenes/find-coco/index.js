@@ -22,10 +22,10 @@ export default class FindCoco extends Phaser.Scene {
 
   preload() {
     this.backgroundImage.preload();
-    this.timer.addTimer(this.startDate);
   }
 
   create() {
+    this.timer.addTimer(this.startDate);
     this.scale.lockOrientation('landscape-primary');
     this.backgroundImage.create();
     allowTap(this.backgroundImage.getImage(), this, (coordsPercent) => {
