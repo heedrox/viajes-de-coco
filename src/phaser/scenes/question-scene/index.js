@@ -65,7 +65,7 @@ export default class QuestionScene extends Phaser.Scene {
 
   addImage() {
     const screenHeight = this.game.canvas.height;
-    const image = this.add.image(this.game.canvas.width / 2, screenHeight / 2, 'backgroundImage');
+    const image = this.add.image(this.game.canvas.width / 2, screenHeight / 2, `background-image-${this.levelData.id}`);
     image.name = 'question-image';
     image.setDepth(1);
     image.setOrigin(0.5, 0.5);
