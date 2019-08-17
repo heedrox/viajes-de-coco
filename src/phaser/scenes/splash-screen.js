@@ -9,11 +9,6 @@ export default class SplashScreen extends Phaser.Scene {
   }
 
   preload() {
-    this.add.sprite(this.game.scale.width / 2, this.game.scale.height / 2, 'loaderBg');
-    const loaderBar = this.add.sprite(this.game.scale.width / 2, this.game.scale.height / 2, 'loaderBar');
-    loaderBar.setScale(1, 1);
-    loaderBar.setCrop(0,0,0,0);
-
     this.menuImages.forEach((image, key) => {
       this.load.image(`menu-image-${key}`, image);
     });
@@ -21,6 +16,19 @@ export default class SplashScreen extends Phaser.Scene {
     this.levels.forEach(level => {
       this.load.image(`background-image-${level.id}`, level.image);
     });
+
+    this.addProgressbar();
+  }
+
+  create() {
+    this.scene.start(this.mainMenuScene.scene.key);
+  }
+
+  addProgressbar() {
+    this.add.sprite(this.game.scale.width / 2, this.game.scale.height / 2, 'loaderBg');
+    const loaderBar = this.add.sprite(this.game.scale.width / 2, this.game.scale.height / 2, 'loaderBar');
+    loaderBar.setScale(1, 1);
+    loaderBar.setCrop(0,0,0,0);
 
     const imageWidth = loaderBar.displayWidth;
     const totalImagesToProcess = this.menuImages.length + this.levels.length;
@@ -34,9 +42,5 @@ export default class SplashScreen extends Phaser.Scene {
     this.load.on('complete', function() {
       loaderBar.setScale(1,1);
     });
-  }
-
-  create() {
-    this.scene.start(this.mainMenuScene.scene.key);
   }
 }
