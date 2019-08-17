@@ -6,6 +6,7 @@ import MainMenu from './scenes/main-menu/';
 import Boot from './scenes/boot';
 import QuestionScene from './scenes/question-scene';
 
+const getCurrentScene = presenter =>  presenter.game.scene.scenes.filter(x => x.scene.isActive())[0];
 export default class PhaserPresenter {
   constructor() {
   }
@@ -43,23 +44,19 @@ export default class PhaserPresenter {
   }
 
   showLevel(levelData, startDate) {
-    const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene;
-    currentActiveScene.start(this.findCocoScene.scene.key, { levelData, startDate });
+    getCurrentScene(this).scene.start(this.findCocoScene.scene.key, { levelData, startDate });
   }
 
   showQuestion(levelData, questions, startDate) {
-    const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0].scene;
-    currentActiveScene.start(this.questionScene.scene.key, { levelData, questions, startDate });
+    getCurrentScene(this).scene.start(this.questionScene.scene.key, { levelData, questions, startDate });
   }
 
   showWrongAnswer() {
-    const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0];
-    currentActiveScene.cameras.main.flash(500, 255, 0, 0);
+    getCurrentScene(this).cameras.main.flash(500, 255, 0, 0);
   }
 
   showRightAnswer() {
-    const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0];
-    currentActiveScene.cameras.main.flash(500, 0, 255, 0);
+    getCurrentScene(this).cameras.main.flash(500, 0, 255, 0);
   }
 
   showScore(score) {
