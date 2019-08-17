@@ -16,8 +16,9 @@ const getRatio = (image, game) => {
 };
 
 export default class QuestionScene extends Phaser.Scene {
-  constructor() {
+  constructor(onQuestionAnswered) {
     super("questionScene");
+    this.onQuestionAnswered = onQuestionAnswered;
   }
 
   init(data) {
@@ -45,7 +46,7 @@ export default class QuestionScene extends Phaser.Scene {
   }
 
   addQuestions() {
-    const questionsComponent = new QuestionsComponent(this, this.questions);
+    const questionsComponent = new QuestionsComponent(this, this.questions, this.onQuestionAnswered);
     questionsComponent.create();
   }
 

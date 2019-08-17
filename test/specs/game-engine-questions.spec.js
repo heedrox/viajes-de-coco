@@ -20,6 +20,8 @@ describe("Game Engine - Questions", function() {
     showQuestion: null,
     setOnQuestionAnswered: () => {},
     showLevel: () => {},
+    showWrongAnswer: () => {},
+    showRightAnswer: () => {},
   };
 
   beforeEach(() => {
@@ -40,24 +42,40 @@ describe("Game Engine - Questions", function() {
   });
 
   describe('when checking question', function() {
-    it('checks right answer', function() {
+    it('does not do anything when right question', function() {
       const gameEngine = new GameEngine({ levels: LEVELS }, presenterMock);
       gameEngine.numLevel = 1;
       gameEngine.startDate = new Date(2010, 1, 2, 17, 0, 10);
+      gameEngine.presenter.showRightAnswer = sinon.spy();
 
       gameEngine.onQuestionAnswered('REAL_DESCRIPTION');
 
-      expect(gameEngine.startDate).to.eql(new Date(2010, 1, 2, 17, 0, 0));
+      expect(gameEngine.startDate).to.eql(new Date(2010, 1, 2, 17, 0, 10));
+      // expect(gameEngine.presenter.showRightAnswer.callCount).to.equal(1);
     });
 
-    it('checks wrong answer', function() {
+    it('penalization of 10 secs when wrong answer', function() {
       const gameEngine = new GameEngine({ levels: LEVELS }, presenterMock);
       gameEngine.numLevel = 1;
       gameEngine.startDate = new Date(2010, 1, 2, 17, 0, 10);
+      gameEngine.presenter.showWrongAnswer = sinon.spy();
 
       gameEngine.onQuestionAnswered('FALSE_DESCR_1');
 
-      expect(gameEngine.startDate).to.eql(new Date(2010, 1, 2, 17, 0, 10));
+      expect(gameEngine.startDate).to.eql(new Date(2010, 1, 2, 17, 0, 0));
+      expect(gameEngine.presenter.showWrongAnswer.callCount).to.equal(1);
+    });
+
+    it('calls next level', function() {
+      const gameEngine = new GameEngine({ levels: LEVELS }, presenterMock);
+      gameEngine.numLevel = 1;
+      presenterMock.showLevel = sinon.spy();
+      gameEngine.startDate = new Date(2010, 1, 2, 17, 0, 10);
+
+      gameEngine.onQuestionAnswered('XXX_IT_DOES_NOT_MATTER_XXX');
+
+      expect(gameEngine.presenter.showLevel.callCount).to.eql(1);
+      expect(gameEngine.presenter.showLevel.getCall(0).args[0]).to.eql(LEVELS[2]);
     });
 
   });

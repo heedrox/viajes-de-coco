@@ -52,6 +52,10 @@ export default class PhaserPresenter {
     currentActiveScene.start(this.questionScene.scene.key, { levelData, questions, startDate });
   }
 
+  showWrongAnswer() {
+
+  }
+
   showScore(score) {
     alert('score: ' + score);
   }
