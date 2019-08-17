@@ -21,7 +21,7 @@ const getPosition = (scene, buttonSize, coords) => {
 const getButtonSize = (scene) => ({
   w: scene.game.canvas.width * 0.4,
   h: scene.game.canvas.height * 0.18,
-  radius: scene.game.canvas.width * 0.02
+  radius: scene.game.canvas.width * 0.015
 });
 
 export default class QuestionsComponent {
@@ -61,8 +61,8 @@ export default class QuestionsComponent {
   }
 
   addButtonText(coords, question, buttonSize) {
-    const textWidth = buttonSize.w - buttonSize.radius * 2;
-    const fontHeight = ((buttonSize.h - buttonSize.radius) * 0.8) / 2;
+    const textWidth = buttonSize.w - buttonSize.radius;
+    const fontHeight = ((buttonSize.h - buttonSize.radius) * 0.75) / 2;
     const posX = this.scene.game.canvas.width * (0.25 + 0.5 * coords.x);
     const posY = this.scene.game.canvas.height * (0.625 + 0.25 * coords.y);
     const text = this.scene.add.text(posX, posY, question, BUTTON_TXT_STYLE(textWidth, fontHeight));

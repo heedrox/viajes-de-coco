@@ -30,7 +30,7 @@ const LEVELS = [
   aLevel(7, image7, 79, 82, 85, 87, 'Catedral Saint-Corentin en Quimper'),
   aLevel(8, image8, 81, 65, 84, 69, 'Casa en Pleyben'),
   aLevel(9, image9, 63, 80, 65.5, 83, 'Crucero del Recinto Parroquial de Guimiliau'),
-  aLevel(10, image10, 21, 74, 24.2, 77, 'Fachada de iglesia del Recinto Parroquial de Guimiliau'),
+  aLevel(10, image10, 21, 74, 24.2, 77, 'Iglesia del Recinto Parroquial de Guimiliau'),
   aLevel(11, image11, 69, 58, 72.2, 60.5, 'Playa de Trebeurden en Bretaña'),
   aLevel(12, image12, 29, 46, 32.2, 50, 'Costa de Granito Rosa de Perros-Guirec'),
   aLevel(14, image14, 14, 71, 17, 74, 'Centro histórico en el pueblo de Dinan'),

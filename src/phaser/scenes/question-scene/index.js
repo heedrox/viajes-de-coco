@@ -81,7 +81,7 @@ export default class QuestionScene extends Phaser.Scene {
   }
 
   showRightAnswer(callback) {
-    this.cameras.main.flash(500, 0, 255, 0, false, callback);
+    this.cameras.main.flash(500, 0, 255, 0, false, () => { callback(); });
   }
 
   addWrongText() {
