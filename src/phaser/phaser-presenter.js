@@ -7,6 +7,7 @@ import Boot from './scenes/boot';
 import QuestionScene from './scenes/question-scene';
 
 const getCurrentScene = presenter =>  presenter.game.scene.scenes.filter(x => x.scene.isActive())[0];
+
 export default class PhaserPresenter {
   constructor() {
   }

@@ -66,9 +66,10 @@ describe("Game Engine - Questions", function() {
       expect(gameEngine.presenter.showWrongAnswer.callCount).to.equal(1);
     });
 
-    it('calls next level', function() {
+    it('calls next level through answer callback', function() {
       const gameEngine = new GameEngine({ levels: LEVELS }, presenterMock);
       gameEngine.numLevel = 1;
+      presenterMock.showWrongAnswer = callback => callback();
       presenterMock.showLevel = sinon.spy();
       gameEngine.startDate = new Date(2010, 1, 2, 17, 0, 10);
 

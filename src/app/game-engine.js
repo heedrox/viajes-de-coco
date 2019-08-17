@@ -51,11 +51,14 @@ export default class GameEngine {
   onQuestionAnswered(selectedDescription) {
     if (selectedDescription !== this.levels[this.numLevel].description) {
       this.startDate.setSeconds(this.startDate.getSeconds() - 10);
-      this.presenter.showWrongAnswer();
+      this.presenter.showWrongAnswer(() => {
+        this.showNextLevel();
+      });
     } else{
-      this.presenter.showRightAnswer();
+      this.presenter.showRightAnswer(() => {
+        this.showNextLevel();
+      });
     }
-    this.showNextLevel();
   }
 
   showClickFailed() {
