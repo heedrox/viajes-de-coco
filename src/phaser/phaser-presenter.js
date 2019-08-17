@@ -52,12 +52,14 @@ export default class PhaserPresenter {
     getCurrentScene(this).scene.start(this.questionScene.scene.key, { levelData, questions, startDate });
   }
 
-  showWrongAnswer() {
+  showWrongAnswer(callback) {
     getCurrentScene(this).cameras.main.flash(500, 255, 0, 0);
+    callback();
   }
 
-  showRightAnswer() {
+  showRightAnswer(callback) {
     getCurrentScene(this).cameras.main.flash(500, 0, 255, 0);
+    callback();
   }
 
   showScore(score) {
