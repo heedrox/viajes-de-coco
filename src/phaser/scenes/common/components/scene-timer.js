@@ -54,4 +54,9 @@ export default class SceneTimer {
   isFailed() {
     return isFailed(this.failedDate);
   }
+
+  addTween(tweenConfig) {
+    tweenConfig.targets = this.timerText;
+    this.scene.tweens.add(tweenConfig);
+  }
 }

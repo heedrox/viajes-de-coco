@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import QuestionText from './components/question-text';
 import QuestionsComponent from './components/questions-component';
+import SceneTimer from '../common/components/scene-timer';
 
 const MAKE_SMALLER = (image, finalSize, finalPosY) => ({
   targets: image,
@@ -23,12 +24,19 @@ export default class QuestionScene extends Phaser.Scene {
     this.levelData = data.levelData;
     this.questions = data.questions;
     this.startDate = data.startDate;
+    this.timer = new SceneTimer(this);
   }
 
   create() {
     this.addText();
     this.addQuestions();
     this.addImage();
+    this.timer.addTimer(this.startDate);
+    this.timer.addTween({
+      x: this.game.canvas.width * 0.9,
+      duration: 500,
+      scale: '*=0.5'
+    })
   }
 
   addText() {

@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import WebFont from 'webfontloader';
 import loaderBar from '../assets/images/loader-bar.png'
 import loaderBg from '../assets/images/loader-bg.png'
+import '../assets/fonts/monofont.css'
+import '../assets/fonts/bangers.css'
 
 export default class Boot extends Phaser.Scene {
   constructor(nextScene) {
@@ -15,8 +17,8 @@ export default class Boot extends Phaser.Scene {
 
   preload() {
     WebFont.load({
-      google: {
-        families: ['Bangers'],
+      custom: {
+        families: ['Bangers', 'Monofont'],
       },
       active: () => { this.isFontLoaded = true; },
       inactive: () => { this.isFontLoaded = true; }
