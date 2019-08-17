@@ -4,7 +4,8 @@ const EMPTY_PRESENTER = {
   setOnCocoClick: () => {},
   setOnMenuStartClicked: () => {},
   setMenuImages: () => {},
-  setOnQuestionAnswered: () => {}
+  setOnQuestionAnswered: () => {},
+  setLevels: () => {},
 };
 
 describe("Game Engine", function() {

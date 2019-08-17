@@ -22,6 +22,7 @@ describe("Game Engine - Questions", function() {
     showLevel: () => {},
     showWrongAnswer: () => {},
     showRightAnswer: () => {},
+    setLevels: () => {}
   };
 
   beforeEach(() => {

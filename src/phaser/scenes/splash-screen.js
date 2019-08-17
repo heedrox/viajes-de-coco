@@ -1,10 +1,11 @@
 import Phaser from 'phaser';
 
 export default class SplashScreen extends Phaser.Scene {
-  constructor(mainMenuScene, menuImages) {
+  constructor(mainMenuScene, menuImages, levelImages) {
     super('splashScreen');
     this.menuImages = menuImages;
     this.mainMenuScene = mainMenuScene;
+    this.levelImages = levelImages;
   }
 
   preload() {
@@ -20,6 +21,8 @@ export default class SplashScreen extends Phaser.Scene {
     this.menuImages.forEach((image, key) => {
       this.load.image(`menu-image-${key}`, image);
     });
+    
+
   }
 
   create() {

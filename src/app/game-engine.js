@@ -14,6 +14,7 @@ export default class GameEngine {
     this.presenter.setOnMenuStartClicked(this.onMenuStartClicked.bind(this));
     this.presenter.setMenuImages(this.menuImages);
     this.presenter.setOnQuestionAnswered(this.onQuestionAnswered.bind(this));
+    this.presenter.setLevels(this.levels);
     this.startDate = null;
     this.lastFailedDate = null;
     this.numLevel = 0;
