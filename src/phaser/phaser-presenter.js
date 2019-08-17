@@ -53,7 +53,13 @@ export default class PhaserPresenter {
   }
 
   showWrongAnswer() {
+    const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0];
+    currentActiveScene.cameras.main.flash(500, 255, 0, 0);
+  }
 
+  showRightAnswer() {
+    const currentActiveScene = this.game.scene.scenes.filter(x => x.scene.isActive())[0];
+    currentActiveScene.cameras.main.flash(500, 0, 255, 0);
   }
 
   showScore(score) {

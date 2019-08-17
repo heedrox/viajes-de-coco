@@ -52,6 +52,8 @@ export default class GameEngine {
     if (selectedDescription !== this.levels[this.numLevel].description) {
       this.startDate.setSeconds(this.startDate.getSeconds() - 10);
       this.presenter.showWrongAnswer();
+    } else{
+      this.presenter.showRightAnswer();
     }
     this.showNextLevel();
   }

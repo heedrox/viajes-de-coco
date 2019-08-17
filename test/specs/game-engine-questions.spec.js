@@ -51,7 +51,7 @@ describe("Game Engine - Questions", function() {
       gameEngine.onQuestionAnswered('REAL_DESCRIPTION');
 
       expect(gameEngine.startDate).to.eql(new Date(2010, 1, 2, 17, 0, 10));
-      // expect(gameEngine.presenter.showRightAnswer.callCount).to.equal(1);
+      expect(gameEngine.presenter.showRightAnswer.callCount).to.equal(1);
     });
 
     it('penalization of 10 secs when wrong answer', function() {
