@@ -21,7 +21,7 @@ const aLevel = (id, image, cocoLeft, cocoTop, cocoRight, cocoBottom, description
 
 
 const LEVELS = [
-  aLevel(1, image1, 79, 61, 81, 64, 'Claustro de la abadía de Mont Saint-Michel'),
+  aLevel(1, image1, 78, 60, 82, 65, 'Claustro de la abadía de Mont Saint-Michel'),
   aLevel(2, image2, 31.5, 78, 34, 80, 'Casas de hormigón en Le Havre'),
   aLevel(3, image3, 75.5, 77.8, 86, 88.8, 'Abadía Jumieges, cerca de Rouen'),
   aLevel(4, image4, 19, 40, 23, 50, 'Túmulo Saint Michel en Carnac'),

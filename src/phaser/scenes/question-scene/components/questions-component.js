@@ -59,7 +59,6 @@ export default class QuestionsComponent {
   addButtonText(coords, question, buttonSize) {
     const textWidth = buttonSize.w - buttonSize.radius * 2;
     const fontHeight = ((buttonSize.h - buttonSize.radius)*0.8)/2;
-    console.log('font height', buttonSize, fontHeight);
     const posX = this.scene.game.canvas.width * (0.25 + 0.5 * coords.x);
     const posY = this.scene.game.canvas.height * (0.625 + 0.25 * coords.y);
     const text = this.scene.add.text(posX, posY, question, BUTTON_TXT_STYLE(textWidth, fontHeight));

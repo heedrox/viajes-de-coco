@@ -5,7 +5,7 @@ import SceneTimer from '../common/components/scene-timer';
 
 const MAKE_SMALLER = (image, finalSize, finalPosY) => ({
   targets: image,
-  duration: 300,
+  duration: 200,
   scale: finalSize,
   y: finalPosY
 });
@@ -57,6 +57,6 @@ export default class QuestionScene extends Phaser.Scene {
     image.setOrigin(0.5, 0.5);
     const ratio = getRatio(image, this.game);
     image.scale = ratio;
-    this.tweens.add(MAKE_SMALLER(image, ratio * 0.25, 0.35 * screenHeight));
+    this.tweens.add(MAKE_SMALLER(image, ratio * 0.3, 0.35 * screenHeight));
   }
 }

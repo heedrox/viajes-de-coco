@@ -11,7 +11,7 @@ export default class QuestionText {
   }
 
   create() {
-    const title = this.scene.add.text(this.scene.scale.width / 2, this.scene.scale.height * 0.1, TEXTS.whatis, TEXT_CSS(8));
+    const title = this.scene.add.text(this.scene.scale.width / 2, this.scene.scale.height * 0.1, TEXTS.whatis, TEXT_CSS(10));
     this.style([title]);
   }
 
