@@ -53,11 +53,11 @@ export default class PhaserPresenter {
   }
 
   showWrongAnswer(callback) {
-    getCurrentScene(this).cameras.main.flash(500, 255, 0, 0, false, callback);
+    this.questionScene.showWrongAnswer(callback);
   }
 
   showRightAnswer(callback) {
-    getCurrentScene(this).cameras.main.flash(500, 0, 255, 0, false, callback);
+    this.questionScene.showRightAnswer(callback);
   }
 
   showScore(score) {

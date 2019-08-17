@@ -3,6 +3,9 @@ import QuestionText from './components/question-text';
 import QuestionsComponent from './components/questions-component';
 import SceneTimer from '../common/components/scene-timer';
 
+const FAILED_TIMER_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#Ac2800', align: 'center' };
+const MAGENTA_COLOR = 'rgba(237,117,163,1)';
+
 const MAKE_SMALLER = (image, finalSize, finalPosY) => ({
   targets: image,
   duration: 200,
@@ -59,5 +62,27 @@ export default class QuestionScene extends Phaser.Scene {
     const ratio = getRatio(image, this.game);
     image.scale = ratio;
     this.tweens.add(MAKE_SMALLER(image, ratio * 0.3, 0.35 * screenHeight));
+  }
+
+  showWrongAnswer(callback) {
+    const txt = this.add.text(this.timer.timerText.x, this.timer.timerText.y, '+ 10', FAILED_TIMER_CSS);
+    txt.setDepth(1);
+    txt.setOrigin(0.5, 0.5);
+    txt.setShadow(3, 3, MAGENTA_COLOR, 0);
+    txt.setFixedSize(200, 54);
+    this.tweens.add({
+      targets: txt,
+      x: this.game.canvas.width/2,
+      y: this.game.canvas.height/2,
+      scale: 5,
+      duration: 500,
+      alpha: 0,
+      onComplete: () => { callback(); }
+    });
+    this.cameras.main.flash(500, 255, 0, 0, false);
+  }
+
+  showRightAnswer(callback) {
+    this.cameras.main.flash(500, 0, 255, 0, false, callback);
   }
 }
