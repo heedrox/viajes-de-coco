@@ -1,5 +1,7 @@
-const TEXT_CSS = size => ({ fontFamily: 'Bangers', font: `${size}vh Bangers`, fill: '#287cc4', align: 'center' });
-const TEXT_MAGENTA_CSS = size => ({ fontFamily: 'Bangers', font: `${size}vh Bangers`, fill: 'rgba(237,117,163,1)', align: 'center' });
+import { isLandscape } from '../../common/is-landscape';
+
+const TEXT_CSS = size => ({ fontFamily: 'Bangers', font: `${size} Bangers`, fill: '#287cc4', align: 'center' });
+const TEXT_MAGENTA_CSS = size => ({ fontFamily: 'Bangers', font: `${size} Bangers`, fill: 'rgba(237,117,163,1)', align: 'center' });
 const MAGENTA_COLOR = 'rgba(237,117,163,1)';
 
 const TEXTS =  {
@@ -40,10 +42,12 @@ export default class MenuText {
   }
 
   create(onMenuStartClicked) {
-    const title = this.scene.add.text(this.scene.scale.width / 2, 1 * this.scene.scale.height/ 6, TEXTS.title, TEXT_CSS(10));
-    const subtitle = this.scene.add.text(this.scene.scale.width / 2, 2 * this.scene.scale.height/ 6, TEXTS.subtitle, TEXT_CSS(14));
-    const textShadow = this.scene.add.text(this.scene.scale.width / 2 + 3, 5 * this.scene.scale.height / 6 + 3, TEXTS.start, TEXT_MAGENTA_CSS(12));
-    const text = this.scene.add.text(this.scene.scale.width / 2, 5 * this.scene.scale.height / 6, TEXTS.start, TEXT_CSS(12));
+    const baseSize = isLandscape(this.scene) ? 10 : 9;
+    const txtUnit = isLandscape(this.scene) ? 'vh' : 'vw';
+    const title = this.scene.add.text(this.scene.scale.width / 2, 1 * this.scene.scale.height/ 6, TEXTS.title, TEXT_CSS(baseSize + txtUnit));
+    const subtitle = this.scene.add.text(this.scene.scale.width / 2, 2 * this.scene.scale.height/ 6, TEXTS.subtitle, TEXT_CSS(baseSize * 1.4 + txtUnit));
+    const textShadow = this.scene.add.text(this.scene.scale.width / 2 + 3, 5 * this.scene.scale.height / 6 + 3, TEXTS.start, TEXT_MAGENTA_CSS(baseSize * 1.2 + txtUnit));
+    const text = this.scene.add.text(this.scene.scale.width / 2, 5 * this.scene.scale.height / 6, TEXTS.start, TEXT_CSS(baseSize * 1.2 + txtUnit));
 
     this.style([title, subtitle], true);
     this.style([text, textShadow], false);

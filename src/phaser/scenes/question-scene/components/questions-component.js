@@ -1,3 +1,5 @@
+import { isLandscape } from '../../common/is-landscape';
+
 const SHADOW_COLOR = 0xed75a3;
 const BACKGROUND_COLOR = 0x287cc4;
 
@@ -63,9 +65,11 @@ export default class QuestionsComponent {
   addButtonText(coords, question, buttonSize) {
     const textWidth = buttonSize.w - buttonSize.radius;
     const fontHeight = ((buttonSize.h - buttonSize.radius) * 0.75) / 2;
+    const fontWidth = ((buttonSize.w - buttonSize.radius) * 0.75) / 5;
+    const fontSize = isLandscape(this.scene) ? fontHeight : fontWidth;
     const posX = this.scene.game.canvas.width * (0.25 + 0.5 * coords.x);
     const posY = this.scene.game.canvas.height * (0.625 + 0.25 * coords.y);
-    const text = this.scene.add.text(posX, posY, question, BUTTON_TXT_STYLE(textWidth, fontHeight));
+    const text = this.scene.add.text(posX, posY, question, BUTTON_TXT_STYLE(textWidth, fontSize));
     text.setOrigin(0.5, 0.5);
     text.setFixedSize(textWidth, 0);
     return text;

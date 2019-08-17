@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
+import { isLandscape } from '../common/is-landscape';
 
-const TEXT_CSS = size => ({ fontFamily: 'Bangers', font: `${size}vh Bangers`, fill: '#287cc4', align: 'center' });
+const TEXT_CSS = size => ({ fontFamily: 'Bangers', font: `${size} Bangers`, fill: '#287cc4', align: 'center' });
 const TIMER_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#287cc4', align: 'center' };
 
 const MAGENTA_COLOR = 'rgba(237,117,163,1)';
@@ -10,9 +11,14 @@ const TEXTS = {
 };
 
 
-const getFinalScale = (game, text) => {
-  const sizeInVh = 2 * Math.round((game.canvas.height  * 10 / 60) / 4);
-  const finalSize = sizeInVh * game.canvas.height / 100;
+const getFinalScale = (scene, text) => {
+  const sizeInVhw = isLandscape(scene) ?
+    (2 * Math.round((scene.game.canvas.height  * 10 / 60) / 4)) :
+    (2 * Math.round((scene.game.canvas.width  * 10 / 60) / 20));
+  const finalSize = isLandscape(scene) ?
+    (sizeInVhw * scene.game.canvas.height / 100) :
+    (sizeInVhw * scene.game.canvas.width / 100);
+
   return finalSize / text.style.fontSize.replace('px', '');
 };
 
@@ -28,7 +34,10 @@ export default class ScoreScene extends Phaser.Scene {
   }
 
   create() {
-    const text = this.add.text(this.game.canvas.width/2, this.game.canvas.height * 15 / 60, TEXTS.yourscoreis, TEXT_CSS(10));
+    const baseSize = isLandscape(this) ? 10 : 9;
+    const txtUnit = isLandscape(this) ? 'vh' : 'vw';
+
+    const text = this.add.text(this.game.canvas.width/2, this.game.canvas.height * 15 / 60, TEXTS.yourscoreis, TEXT_CSS(baseSize + txtUnit));
     this.style(text);
     this.addEntranceTween(text);
 
@@ -57,9 +66,10 @@ export default class ScoreScene extends Phaser.Scene {
   }
 
   addScoreTween(text) {
-    const finalScale = getFinalScale(this.game, text);
+    const finalScale = getFinalScale(this, text);
+    const finalSize = finalScale * text.style.fontSize.replace('px', '');
+
     const finalY = this.game.canvas.height * 40 / 60;
-    const finalSize = 2 * Math.round((game.canvas.height  * 10 / 60) / 4);
 
     this.tweens.add({
       targets: text,
@@ -67,7 +77,7 @@ export default class ScoreScene extends Phaser.Scene {
       y: finalY,
       duration: 500,
       onComplete: () => {
-        const scoreText = this.add.text(this.game.canvas.width/2, finalY, this.score, TEXT_CSS(finalSize));
+        const scoreText = this.add.text(this.game.canvas.width/2, finalY, this.score, TEXT_CSS(finalSize+'px'));
         this.style(scoreText);
         text.destroy();
       }
@@ -79,6 +89,7 @@ export default class ScoreScene extends Phaser.Scene {
     const sprite = this.add.sprite(this.game.canvas.width - padding, this.game.canvas.height - padding, 'reload');
     const scale = game.canvas.height / 1000;
     sprite.setScale(scale, scale);
+    sprite.setOrigin(1, 1);
     sprite.setInteractive().on('pointerup', () => {
       window.location.reload();
     });

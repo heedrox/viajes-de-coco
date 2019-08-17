@@ -1,4 +1,6 @@
-const TEXT_CSS = size => ({ fontFamily: 'Bangers', font: `${size}vh Bangers`, fill: '#287cc4', align: 'center' });
+import { isLandscape } from '../../common/is-landscape';
+
+const TEXT_CSS = size => ({ fontFamily: 'Bangers', font: `${size} Bangers`, fill: '#287cc4', align: 'center' });
 const MAGENTA_COLOR = 'rgba(237,117,163,1)';
 
 const TEXTS =  {
@@ -11,7 +13,9 @@ export default class QuestionText {
   }
 
   create() {
-    const title = this.scene.add.text(this.scene.scale.width / 2, this.scene.scale.height * 0.1, TEXTS.whatis, TEXT_CSS(10));
+    const baseSize = isLandscape(this.scene) ? 10 : 9;
+    const txtUnit = isLandscape(this.scene) ? 'vh' : 'vw';
+    const title = this.scene.add.text(this.scene.scale.width / 2, this.scene.scale.height * 0.1, TEXTS.whatis, TEXT_CSS(baseSize + txtUnit));
     this.style([title]);
   }
 
