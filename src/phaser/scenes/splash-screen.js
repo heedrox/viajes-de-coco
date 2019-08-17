@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import reloadImage from '../assets/images/reload.png';
 
 export default class SplashScreen extends Phaser.Scene {
   constructor(mainMenuScene, menuImages, levels) {
@@ -16,6 +17,8 @@ export default class SplashScreen extends Phaser.Scene {
     this.levels.forEach(level => {
       this.load.image(`background-image-${level.id}`, level.image);
     });
+
+    this.load.image(`reload`, reloadImage);
 
     this.addProgressbar();
   }

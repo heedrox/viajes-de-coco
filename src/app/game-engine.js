@@ -82,7 +82,7 @@ export default class GameEngine {
   }
 
   endGame() {
-    const score = Math.round((new Date() - this.startDate)/10)/100;
+    const score = Math.round(Math.round((new Date() - this.startDate)/10)/10);
     this.presenter.showScore(score);
 
   }

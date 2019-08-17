@@ -5,6 +5,7 @@ import FindCoco from './scenes/find-coco/';
 import MainMenu from './scenes/main-menu/';
 import Boot from './scenes/boot';
 import QuestionScene from './scenes/question-scene';
+import ScoreScene from './scenes/score-scene';
 
 const getCurrentScene = presenter =>  presenter.game.scene.scenes.filter(x => x.scene.isActive())[0];
 
@@ -38,12 +39,14 @@ export default class PhaserPresenter {
     this.splashScreen = new SplashScreen(this.mainMenuScene, this.menuImages, this.levels);
     this.bootScene = new Boot(this.splashScreen);
     this.questionScene = new QuestionScene(this.onQuestionAnswered);
+    this.scoreScene = new ScoreScene(this.onClickRestart.bind(this));
     this.game = new Phaser.Game(phaserConfig([
       this.bootScene,
       this.splashScreen,
       this.mainMenuScene,
       this.findCocoScene,
-      this.questionScene
+      this.questionScene,
+      this.scoreScene
     ]));
     window.game = this.game; //debugging purposes
   }
@@ -65,11 +68,15 @@ export default class PhaserPresenter {
   }
 
   showScore(score) {
-    alert('score: ' + score);
+    getCurrentScene(this).scene.start(this.scoreScene.scene.key, { score });
   }
 
   showClickFailed(failedDate) {
     this.game.scene.getScene(this.findCocoScene.scene.key).failed(failedDate);
+  }
+
+  onClickRestart() {
+    getCurrentScene(this).scene.start(this.mainMenuScene.key);
   }
 
 }
