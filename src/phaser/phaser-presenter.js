@@ -35,7 +35,7 @@ export default class PhaserPresenter {
   start() {
     this.mainMenuScene = new MainMenu(this.menuImages, this.onMenuStartClicked);
     this.findCocoScene = new FindCoco(this.onCocoClick);
-    this.splashScreen = new SplashScreen(this.mainMenuScene, this.menuImages, this.levelImages);
+    this.splashScreen = new SplashScreen(this.mainMenuScene, this.menuImages, this.levels);
     this.bootScene = new Boot(this.splashScreen);
     this.questionScene = new QuestionScene(this.onQuestionAnswered);
     this.game = new Phaser.Game(phaserConfig([
