@@ -13,6 +13,7 @@ export default class GameEngine {
     this.presenter.setOnCocoClick(this.onCocoClick.bind(this));
     this.presenter.setOnMenuStartClicked(this.onMenuStartClicked.bind(this));
     this.presenter.setMenuImages(this.menuImages);
+    this.presenter.setOnQuestionAnswered(this.onQuestionAnswered.bind(this));
     this.startDate = null;
     this.lastFailedDate = null;
     this.numLevel = 0;
@@ -45,6 +46,12 @@ export default class GameEngine {
     finalQuestions.push(this.levels[this.numLevel].description);
     shuffleArray(finalQuestions);
     this.presenter.showQuestion(this.levels[this.numLevel], finalQuestions, this.startDate);
+  }
+
+  onQuestionAnswered(selectedDescription) {
+    if (selectedDescription === this.levels[this.numLevel].description) {
+      this.startDate.setSeconds(this.startDate.getSeconds() - 10);
+    }
   }
 
   showClickFailed() {

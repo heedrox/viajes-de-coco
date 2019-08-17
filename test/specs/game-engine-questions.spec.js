@@ -18,6 +18,7 @@ describe("Game Engine - Questions", function() {
     setOnMenuStartClicked: () => {},
     setMenuImages: () => {},
     showQuestion: null,
+    setOnQuestionAnswered: () => {},
     showLevel: () => {},
   };
 
@@ -36,5 +37,28 @@ describe("Game Engine - Questions", function() {
     expect(otherQuestions.length).to.equal(4);
     expect(otherQuestions.filter(q => q.indexOf('REAL_DESCRIPTION') >= 0).length).to.equal(1);
     expect(otherQuestions.filter(q => q.indexOf('FALSE_DESC') !== -1).length).to.equal(3);
+  });
+
+  describe('when checking question', function() {
+    it('checks right answer', function() {
+      const gameEngine = new GameEngine({ levels: LEVELS }, presenterMock);
+      gameEngine.numLevel = 1;
+      gameEngine.startDate = new Date(2010, 1, 2, 17, 0, 10);
+
+      gameEngine.onQuestionAnswered('REAL_DESCRIPTION');
+
+      expect(gameEngine.startDate).to.eql(new Date(2010, 1, 2, 17, 0, 0));
+    });
+
+    it('checks wrong answer', function() {
+      const gameEngine = new GameEngine({ levels: LEVELS }, presenterMock);
+      gameEngine.numLevel = 1;
+      gameEngine.startDate = new Date(2010, 1, 2, 17, 0, 10);
+
+      gameEngine.onQuestionAnswered('FALSE_DESCR_1');
+
+      expect(gameEngine.startDate).to.eql(new Date(2010, 1, 2, 17, 0, 10));
+    });
+
   });
 });
