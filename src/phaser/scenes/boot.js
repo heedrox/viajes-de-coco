@@ -5,6 +5,8 @@ import loaderBg from '../assets/images/loader-bg.png'
 import '../assets/fonts/monofont.css'
 import '../assets/fonts/bangers.css'
 
+const getCurrentScene = game =>  game.scene.scenes.filter(x => x.scene.isActive())[0];
+
 export default class Boot extends Phaser.Scene {
   constructor(nextScene) {
     super("boot");
@@ -38,6 +40,10 @@ export default class Boot extends Phaser.Scene {
         this.scene.start(this.nextScene.scene.key);
       }
     }, 100);
+    this.game.scale.on('orientationchange', () => {
+      console.log('restarting current scene');
+      getCurrentScene(this.game).scene.restart();
+    });
   }
 
 }
