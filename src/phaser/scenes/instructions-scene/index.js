@@ -46,7 +46,6 @@ export default class InstructionsScene extends Phaser.Scene {
 
     const text = this.add.text(posX, posY, TEXTS.body, TEXT_BODY_CSS(width, (baseSize * 0.5)+ txtUnit));
     text.setOrigin(0, 0);
-    // text.setFixedSize(width, height);
 
     this.setScrollable(posX, posY, width, height, text);
   }
