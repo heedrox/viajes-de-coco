@@ -37,13 +37,22 @@ export default class SplashScreen extends Phaser.Scene {
     const totalImagesToProcess = this.menuImages.length + this.levels.length;
     let imagesProcessed = 0;
 
-    this.load.on('filecomplete', function () {
+    this.load.on('filecomplete', function (key, type, data) {
       imagesProcessed++;
+      // console.log(key, type, data);
       loaderBar.setCrop(0, 0, imagesProcessed / totalImagesToProcess*imageWidth, loaderBar.displayHeight)
     });
 
     this.load.on('complete', function() {
       loaderBar.setScale(1,1);
+    });
+
+    this.load.on('loaderror', function(fileRef) {
+      // console.log('load error on', fileRef);
+    });
+
+    this.load.on('load', function(x) {
+      // console.log('load file', x);
     });
   }
 }
