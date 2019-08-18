@@ -46,3 +46,7 @@ Thanks for your work!
 ## Monofont
 
 https://www.fontsupply.com/fonts/M/Monofont.html
+
+## Favicons
+
+Thanks to faviconit.com
