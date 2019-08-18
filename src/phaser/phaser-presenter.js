@@ -6,6 +6,7 @@ import MainMenu from './scenes/main-menu/';
 import Boot from './scenes/boot';
 import QuestionScene from './scenes/question-scene';
 import ScoreScene from './scenes/score-scene';
+import InstructionsScene from './scenes/instructions-scene';
 
 const getCurrentScene = presenter =>  presenter.game.scene.scenes.filter(x => x.scene.isActive())[0];
 
@@ -34,9 +35,10 @@ export default class PhaserPresenter {
   }
 
   start() {
-    this.mainMenuScene = new MainMenu(this.menuImages, this.onMenuStartClicked);
+    this.mainMenuScene = new MainMenu(this.menuImages, this.showInstructions.bind(this));
+    this.instructionsScene = new InstructionsScene(this.onMenuStartClicked);
     this.findCocoScene = new FindCoco(this.onCocoClick);
-    this.splashScreen = new SplashScreen(this.mainMenuScene, this.menuImages, this.levels);
+    this.splashScreen = new SplashScreen(this.menuImages, this.levels, this.showMainMenu.bind(this));
     this.bootScene = new Boot(this.splashScreen);
     this.questionScene = new QuestionScene(this.onQuestionAnswered);
     this.scoreScene = new ScoreScene(this.onClickRestart.bind(this));
@@ -44,12 +46,21 @@ export default class PhaserPresenter {
       this.bootScene,
       this.splashScreen,
       this.mainMenuScene,
+      this.instructionsScene,
       this.findCocoScene,
       this.questionScene,
       this.scoreScene
     ]));
     this.allowScreenChange();
     window.game = this.game; //debugging purposes
+  }
+
+  showMainMenu(fromScene) {
+    fromScene.scene.start(this.mainMenuScene.scene.key);
+  }
+
+  showInstructions() {
+    getCurrentScene(this).scene.start(this.instructionsScene.scene.key);
   }
 
   showLevel(levelData, startDate) {

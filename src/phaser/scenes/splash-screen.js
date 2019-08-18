@@ -2,10 +2,10 @@ import Phaser from 'phaser';
 import reloadImage from '../assets/images/reload.png';
 
 export default class SplashScreen extends Phaser.Scene {
-  constructor(mainMenuScene, menuImages, levels) {
+  constructor(menuImages, levels, onSplashScreenFinished) {
     super('splashScreen');
     this.menuImages = menuImages;
-    this.mainMenuScene = mainMenuScene;
+    this.onSplashScreenFinished = onSplashScreenFinished;
     this.levels = levels;
   }
 
@@ -24,7 +24,7 @@ export default class SplashScreen extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start(this.mainMenuScene.scene.key);
+    this.onSplashScreenFinished(this);
   }
 
   addProgressbar() {
