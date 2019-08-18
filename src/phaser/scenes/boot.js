@@ -51,5 +51,8 @@ export default class Boot extends Phaser.Scene {
     this.game.scale.on('orientationchange', () => {
       getCurrentScene(this.game).scene.restart();
     });
+    this.game.scale.on('resize', () => {
+      getCurrentScene(this.game).scene.restart();
+    });
   }
 }

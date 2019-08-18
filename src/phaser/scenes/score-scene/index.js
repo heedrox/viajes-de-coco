@@ -13,7 +13,7 @@ const TEXTS = {
 
 const getFinalScale = (scene, text) => {
   const sizeInVhw = isLandscape(scene) ?
-    (2 * Math.round((scene.game.canvas.height  * 10 / 60) / 4)) :
+    (2 * Math.round((scene.game.canvas.height  * 10 / 60) / 7)) :
     (2 * Math.round((scene.game.canvas.width  * 10 / 60) / 20));
   const finalSize = isLandscape(scene) ?
     (sizeInVhw * scene.game.canvas.height / 100) :
