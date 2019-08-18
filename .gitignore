@@ -15,3 +15,5 @@ dist/
 
 # Firebase
 firebase.json
+.firebaserc
+.firebase/

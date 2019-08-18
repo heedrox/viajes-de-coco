@@ -1,5 +1,13 @@
 # Los viajes de Coco
 
+<img alt="viajes de coco - main image" src="./src/app/images/menu/portada-1.jpg" width="400"/>
+
+
+## Play
+
+You can play at: [Viajes de Coco - http://bit.ly/viajesdecoco](http://bit.ly/viajesdecoco "Viajes de Coco")
+
+
 ## Develop
 
 Use node v8.
