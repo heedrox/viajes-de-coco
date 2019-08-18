@@ -5,7 +5,9 @@
 
 ## Play
 
-You can play at: [Viajes de Coco - http://bit.ly/viajesdecoco](http://bit.ly/viajesdecoco "Viajes de Coco")
+You can try it now, here! 
+ 
+[Viajes de Coco - http://bit.ly/viajesdecoco](http://bit.ly/viajesdecoco "Viajes de Coco")
 
 
 ## Develop
