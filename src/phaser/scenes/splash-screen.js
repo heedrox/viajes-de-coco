@@ -49,6 +49,8 @@ export default class SplashScreen extends Phaser.Scene {
 
     this.load.on('loaderror', function(fileRef) {
       // console.log('load error on', fileRef);
+      alert('Error cargando imágenes. Asegúrate que estás en un sitio con cobertura y pulsa ACEPTAR para reintentar');
+      window.location.reload();
     });
 
     this.load.on('load', function(x) {
