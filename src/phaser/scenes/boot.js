@@ -34,16 +34,22 @@ export default class Boot extends Phaser.Scene {
   }
 
   create() {
+    this.checkFontsLoaded();
+    this.allowScreenChange();
+  }
+
+  checkFontsLoaded() {
     const retryInterval = setInterval(() => {
       if (this.isFontLoaded) {
         clearInterval(retryInterval);
         this.scene.start(this.nextScene.scene.key);
       }
     }, 100);
+  }
+
+  allowScreenChange() {
     this.game.scale.on('orientationchange', () => {
-      console.log('restarting current scene');
       getCurrentScene(this.game).scene.restart();
     });
   }
-
 }

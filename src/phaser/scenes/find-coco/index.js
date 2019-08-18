@@ -8,15 +8,11 @@ export default class FindCoco extends Phaser.Scene {
   constructor(onCocoClick) {
     super('findCoco');
     this.onCocoClick = onCocoClick;
-  }
-
-  start(levelData, startDate) {
-    this.scene.start(this.scene.key, { levelData, startDate });
+    this.timer = new SceneTimer(this);
   }
 
   init(data) {
     this.startDate = data.startDate;
-    this.timer = new SceneTimer(this);
     this.backgroundImage = new SceneImage(this, data.levelData);
   }
 

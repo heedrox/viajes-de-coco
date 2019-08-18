@@ -51,7 +51,7 @@ export default class ScoreScene extends Phaser.Scene {
   style(text) {
     text.setDepth(10);
     text.setOrigin(0.5, 0.5);
-    text.setFixedSize(text.displayWidth + 20, text.displayHeight + 20);
+    text.setFixedSize(text.displayWidth + 100, text.displayHeight + 20);
     text.setShadow(3, 3, MAGENTA_COLOR, 0);
   }
 
