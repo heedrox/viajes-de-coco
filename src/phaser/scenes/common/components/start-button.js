@@ -52,8 +52,8 @@ export default class StartButton {
     this.scene.tweens.add(SECOND_BOUNCE(text));
     text.setInteractive().on('pointerup', () => {
       this.onButtonClicked();
-    })
-
+    });
+    return text;
   }
 
   style(text) {
