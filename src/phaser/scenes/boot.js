@@ -33,7 +33,6 @@ export default class Boot extends Phaser.Scene {
 
   create() {
     this.checkFontsLoaded();
-    this.allowScreenChange();
   }
 
   checkFontsLoaded() {
