@@ -48,6 +48,7 @@ export default class PhaserPresenter {
       this.questionScene,
       this.scoreScene
     ]));
+    this.allowScreenChange();
     window.game = this.game; //debugging purposes
   }
 
@@ -77,6 +78,22 @@ export default class PhaserPresenter {
 
   onClickRestart() {
     getCurrentScene(this).scene.start(this.mainMenuScene.key);
+  }
+
+  allowScreenChange() {
+    this.game.scale.on('orientationchange', () => {
+      this.restartActiveScene();
+    });
+    this.game.scale.on('resize', () => {
+      this.restartActiveScene();
+    });
+  }
+
+  restartActiveScene() {
+    const currentScene = getCurrentScene(this);
+    if (currentScene) {
+      currentScene.scene.restart();
+    }
   }
 
 }

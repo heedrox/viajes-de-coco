@@ -5,8 +5,6 @@ import loaderBg from '../assets/images/loader-bg.png'
 import '../assets/fonts/monofont.css'
 import '../assets/fonts/bangers.css'
 
-const getCurrentScene = game =>  game.scene.scenes.filter(x => x.scene.isActive())[0];
-
 export default class Boot extends Phaser.Scene {
   constructor(nextScene) {
     super("boot");
@@ -47,12 +45,5 @@ export default class Boot extends Phaser.Scene {
     }, 100);
   }
 
-  allowScreenChange() {
-    this.game.scale.on('orientationchange', () => {
-      getCurrentScene(this.game).scene.restart();
-    });
-    this.game.scale.on('resize', () => {
-      getCurrentScene(this.game).scene.restart();
-    });
-  }
+
 }
