@@ -4,7 +4,9 @@ import QuestionsComponent from './components/questions-component';
 import SceneTimer from '../common/components/scene-timer';
 
 const FAILED_TIMER_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#Ac2800', align: 'center' };
+const OK_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#009900', align: 'center' };
 const MAGENTA_COLOR = 'rgba(237,117,163,1)';
+const GREEN_SHADOW_COLOR = 'rgba(117,255,117,1)';
 
 const EXPLODE_TWEEN = (txt, canvas, callback) => ({
   targets: txt,
@@ -81,9 +83,19 @@ export default class QuestionScene extends Phaser.Scene {
   }
 
   showRightAnswer(callback) {
-    this.cameras.main.flash(500, 0, 255, 0, false, () => { callback(); });
+    const txt = this.addRightText();
+    this.tweens.add(EXPLODE_TWEEN(txt, this.game.canvas, callback));
+    this.cameras.main.flash(500, 0, 255, 0, false);
   }
 
+  addRightText() {
+    const txt = this.add.text(this.game.scale.width / 2, this.game.scale.height / 2, '¡Bien!', OK_CSS);
+    txt.setDepth(1);
+    txt.setOrigin(0.5, 0.5);
+    txt.setShadow(3, 3, GREEN_SHADOW_COLOR, 0);
+    txt.setFixedSize(200, 54);
+    return txt;
+  }
   addWrongText() {
     const txt = this.add.text(this.timer.timerText.x, this.timer.timerText.y, '+ 10', FAILED_TIMER_CSS);
     txt.setDepth(1);
