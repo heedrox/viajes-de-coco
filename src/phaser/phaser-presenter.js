@@ -9,6 +9,7 @@ import ScoreScene from './scenes/score-scene';
 import InstructionsScene from './scenes/instructions-scene';
 
 const getCurrentScene = presenter =>  presenter.game.scene.scenes.filter(x => x.scene.isActive())[0];
+const isRestartableScene = scene => scene && scene.scene.key !== 'boot' && scene.scene.key !== 'splashScreen';
 
 export default class PhaserPresenter {
   constructor() {
@@ -102,7 +103,7 @@ export default class PhaserPresenter {
 
   restartActiveScene() {
     const currentScene = getCurrentScene(this);
-    if (currentScene) {
+    if (isRestartableScene(currentScene)) {
       currentScene.scene.restart();
     }
   }

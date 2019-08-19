@@ -1,2 +1,2 @@
 export const isLandscape = (scene) =>
-  scene.scale.orientation.indexOf('landscape') !== -1;
+  scene && scene.scale && scene.scale.orientation && scene.scale.orientation.indexOf('landscape') !== -1;

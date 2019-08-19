@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Los Viajes de Coco</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta http-equiv="cleartype" content="on">
@@ -41,10 +42,23 @@
 </head>
 
 <body>
-
 <div id="content"></div>
 <!-- uncomment the line bellow for cordova feature -->
 <!-- <script type="text/javascript" src="cordova.js"></script> -->
+<p style="text-align:center">Cargando...</p>
+<div id="iosNotice" style="visibility:hidden; padding: 1vw; text-align: left;">
+  <h2>Detectado un iPhone</h2>
+  <p>Para ejecutar este juego, debes añadir esta web a tu pantalla de inicio y ejecutarlo desde allí</p>
+  <p>Lo siento, pero es la única forma de ejecutar esta aplicación en iphone</p>
+  <p>1.- Pulsa el botón "Compartir" del menú: </p>
+  <p><img id="img1" src="" style="width:100%"></p>
+  <p>2.- Pulsa en "Añadir a pantalla de inicio": </p>
+  <p><img id="img2" src="" style="width:100%"></p>
+  <p>3.- Una vez guardada, sal de Safari, y busca la imagen en tus apps de iPhone. Ábrela.</p>
+  <p><img id="img3" src="" style="width:100%"></p>
+  <p><b>¡Ya deberías poder jugar!</b></p>
+
+</div>
 </body>
 
 </html>
