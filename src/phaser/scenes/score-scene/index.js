@@ -7,7 +7,9 @@ const TIMER_CSS = { fontFamily: 'Bangers', font: '48px Bangers', fill: '#287cc4'
 const MAGENTA_COLOR = 'rgba(237,117,163,1)';
 
 const TEXTS = {
-  'yourscoreis': 'Tu puntuación es...'
+  'yourscoreis': 'Tu puntuación es...',
+  'lessthan1000': '¿Puedes conseguir menos\n de 1000 ptos.?',
+  'welldone': '¡ENHORABUENA!'
 };
 
 
@@ -41,7 +43,8 @@ export default class ScoreScene extends Phaser.Scene {
     this.style(text);
     this.addEntranceTween(text);
 
-    const scoreText = this.add.text(this.game.canvas.width/2, 30, this.score, TIMER_CSS);
+    const scoreStr = parseInt(this.score) > 1000 ? `${this.score}\n${TEXTS.lessthan1000}` : `${this.score}\n${TEXTS.welldone}`;
+    const scoreText = this.add.text(this.game.canvas.width/2, 30, scoreStr, TIMER_CSS);
     this.style(scoreText);
     this.addScoreTween(scoreText);
 
@@ -77,7 +80,7 @@ export default class ScoreScene extends Phaser.Scene {
       y: finalY,
       duration: 500,
       onComplete: () => {
-        const scoreText = this.add.text(this.game.canvas.width/2, finalY, this.score, TEXT_CSS(finalSize+'px'));
+        const scoreText = this.add.text(this.game.canvas.width/2, finalY, text.text, TEXT_CSS(finalSize+'px'));
         this.style(scoreText);
         text.destroy();
       }
