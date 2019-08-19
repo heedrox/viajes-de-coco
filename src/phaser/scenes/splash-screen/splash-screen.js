@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import reloadImage from '../assets/images/reload.png';
+import reloadImage from '../../assets/images/reload.png';
 
 export default class SplashScreen extends Phaser.Scene {
   constructor(menuImages, levels, onSplashScreenFinished) {

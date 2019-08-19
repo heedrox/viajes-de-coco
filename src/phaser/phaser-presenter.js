@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
 import { phaserConfig } from './phaser-config';
-import SplashScreen from './scenes/splash-screen';
+import SplashScreen from './scenes/splash-screen/splash-screen';
 import FindCoco from './scenes/find-coco/';
 import MainMenu from './scenes/main-menu/';
-import Boot from './scenes/boot';
+import Boot from './scenes/boot/boot';
 import QuestionScene from './scenes/question-scene';
 import ScoreScene from './scenes/score-scene';
 import InstructionsScene from './scenes/instructions-scene';
