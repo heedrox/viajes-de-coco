@@ -28,19 +28,22 @@ export default class SplashScreen extends Phaser.Scene {
   }
 
   addProgressbar() {
-    this.add.sprite(this.game.scale.width / 2, this.game.scale.height / 2, 'loaderBg');
+    const loaderBg = this.add.sprite(this.game.scale.width / 2, this.game.scale.height / 2, 'loaderBg');
+    const loaderScale = Math.min(this.game.scale.width * 0.5 / 400, 1);
+    loaderBg.setScale(loaderScale);
+    console.log('loader scale', loaderScale);
     const loaderBar = this.add.sprite(this.game.scale.width / 2, this.game.scale.height / 2, 'loaderBar');
-    loaderBar.setScale(1, 1);
+    loaderBar.setScale(loaderScale);
     loaderBar.setCrop(0,0,0,0);
 
-    const imageWidth = loaderBar.displayWidth;
+    const imageWidth = loaderBar.width;
     const totalImagesToProcess = this.menuImages.length + this.levels.length;
     let imagesProcessed = 0;
 
     this.load.on('filecomplete', function (key, type, data) {
       imagesProcessed++;
       // console.log(key, type, data);
-      loaderBar.setCrop(0, 0, imagesProcessed / totalImagesToProcess*imageWidth, loaderBar.displayHeight)
+      loaderBar.setCrop(0, 0, imagesProcessed / totalImagesToProcess*imageWidth, loaderBar.height)
     });
 
     this.load.on('complete', function() {

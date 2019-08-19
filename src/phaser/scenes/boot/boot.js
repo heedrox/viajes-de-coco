@@ -3,7 +3,7 @@ import WebFont from 'webfontloader';
 import loaderBar from '../../assets/images/loader-bar.png'
 import loaderBg from '../../assets/images/loader-bg.png'
 import '../../assets/fonts/monofont.css'
-import '../assets/fonts/bangers.css'
+import '../../assets/fonts/bangers.css'
 
 const TEXTS = {
   "fullscreen": "Pulsa para modo pantalla completa",
